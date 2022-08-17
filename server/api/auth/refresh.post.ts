@@ -5,7 +5,7 @@ import { getCookie, setCookie } from 'h3';
 export default defineEventHandler(async event => {
   const refreshToken = getCookie(event, 'refresh_token');
   if (!refreshToken) {
-    return createError({ statusCode: 401, statusMessage: 'Bad Credentials.' });
+    throw createError({ statusCode: 401, statusMessage: 'Bad Credentials.' });
   }
 
   const account = await prisma.account.findFirst({
@@ -13,7 +13,7 @@ export default defineEventHandler(async event => {
     include: { user: true }
   });
   if (!account) {
-    return createError({ statusCode: 401, statusMessage: 'Bad Credentials.' });
+    throw createError({ statusCode: 401, statusMessage: 'Bad Credentials.' });
   }
 
   const tokens = {

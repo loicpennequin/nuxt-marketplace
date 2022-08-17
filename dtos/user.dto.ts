@@ -10,5 +10,7 @@ export const createUserDto = z.object({
   password: z.string().min(PASSWORD_MIN_LENGTH),
   email: z.string().email().trim()
 });
-
 export type CreateUserDto = z.infer<typeof createUserDto>;
+
+export const findUserByIdDto = z.string();
+export type FindUserByIdDto = z.infer<typeof findUserByIdDto>;

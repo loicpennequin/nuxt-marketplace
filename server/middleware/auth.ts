@@ -2,6 +2,7 @@ import { verifyJwt } from '~~/utils/helpers/tokens';
 import prisma from '../prisma/client';
 
 export default defineEventHandler(async event => {
+  console.log(event.req.method, event.req.url);
   if (!event.req.url?.startsWith('/api')) return;
   const { authorization } = event.req.headers;
   if (!authorization) return;
