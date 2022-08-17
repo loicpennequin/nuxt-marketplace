@@ -1,0 +1,49 @@
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model User {
+  id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  email         String    @unique
+  username      String
+  passwordHash  String
+  bio           String?
+  account       Account?
+  products      Product[]
+  cartsAsSeller Cart[]    @relation(name: "seller")
+  cartsAsBuyer  Cart[]    @relation(name: "buyer")
+}
+
+model Account {
+  id                    String  @id @default(cuid())
+  refreshToken          String? @db.VarChar(2000)
+  refreshTokenExpiresIn Int?
+  userId                String  @unique
+  user                  User    @relation(fields: [userId], references: [id])
+}
+
+model Product {
+  id          String @id @default(cuid())
+  name        String @db.VarChar(255)
+  description String
+  price       Int
+  sellerId    String
+  seller      User   @relation(fields: [sellerId], references: [id])
+}
+
+model Cart {
+  id       String @id @default(cuid())
+  buyerId  String
+  sellerId String
+  seller   User   @relation(name: "seller", fields: [sellerId], references: [id])
+  buyer    User   @relation(name: "buyer", fields: [buyerId], references: [id])
+}
