@@ -12,8 +12,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@unocss/nuxt',
-    'trpc-nuxt'
+    '@unocss/nuxt'
   ],
 
   intlify: {

@@ -15,6 +15,21 @@ import {
   UseMutationOptions,
   UseQueryOptions
 } from 'vue-query';
+import type { TRPCClient } from '@trpc/client';
+import type { Ref } from 'vue';
+import { useStorage } from '@vueuse/core';
+import { useNuxtApp } from '#app';
+
+export function useClient(): TRPCClient<AppRouter> {
+  const { $client } = useNuxtApp();
+  return $client;
+}
+
+export function useClientHeaders(
+  initialValue: MaybeRef<Record<string, any>> = {}
+): Ref<Record<string, any>> {
+  return useStorage('trpc-nuxt-header', initialValue);
+}
 
 export type TrpcQueryOptions<TPath extends TrpcQueryPath> = UseQueryOptions<
   InferQueryOutput<TPath>,

@@ -5,7 +5,7 @@ export const useCurrentUser = () => {
   }));
 
   const query = useTrpcQuery(
-    computed(() => ['findUserById', decodedJwt.value?.sub]),
+    computed(() => ['user.findById', decodedJwt.value?.sub]),
     opts
   );
 

@@ -1,15 +1,30 @@
 import { Ref } from 'vue';
-import type { inferHandlerInput, inferProcedureOutput } from '@trpc/server';
-import {
-  TQueries,
-  TQueryValues,
-  inferProcedures
-} from 'trpc-nuxt/dist/runtime/client';
+import type {
+  ProcedureRecord,
+  inferHandlerInput,
+  inferProcedureInput,
+  inferProcedureOutput
+} from '@trpc/server';
+import type { TRPCClientErrorLike } from '@trpc/client';
 import type { router } from '@/server/trpc';
 
 export type MaybeRef<T> = Ref<T> | T;
 export type Maybe<T> = T | null | undefined;
 export type AppRouter = typeof router;
+
+export type inferProcedures<
+  TObj extends ProcedureRecord<any, any, any, any, any, any>
+> = {
+  [TPath in keyof TObj]: {
+    input: inferProcedureInput<TObj[TPath]>;
+    output: inferProcedureOutput<TObj[TPath]>;
+  };
+};
+
+export type TQueries = AppRouter['_def']['queries'];
+export type TError = TRPCClientErrorLike<AppRouter>;
+
+export type TQueryValues = inferProcedures<AppRouter['_def']['queries']>;
 
 export type TMutations = AppRouter['_def']['mutations'];
 export type TMutationValues = inferProcedures<AppRouter['_def']['mutations']>;
