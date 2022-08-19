@@ -10,13 +10,13 @@ export type TrpcContext = {
 export const createContext = async (
   event: CompatibilityEvent
 ): Promise<TrpcContext> => {
+  console.log(`[ TRPC ] - ${event.req.url?.split('/').reverse()[0]}`);
   if (event.req.headers instanceof Headers) {
     event.req.headers = Object.fromEntries(event.req.headers.entries());
   }
 
   try {
     const { authorization } = event.req.headers;
-    console.log(event.req.url);
     if (authorization) {
       const jwt = verifyJwt(authorization.replace('Bearer ', ''));
 

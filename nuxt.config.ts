@@ -39,6 +39,13 @@ export default defineNuxtConfig({
     transformers: [transformerDirective()]
   },
 
+  colorMode: {
+    preference: 'system',
+    fallback: 'light',
+    classPrefix: '',
+    classSuffix: ''
+  },
+
   runtimeConfig: {
     jwtSecret: '',
     refreshTokenSecret: ''

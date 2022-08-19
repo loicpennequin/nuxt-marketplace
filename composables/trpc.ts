@@ -25,10 +25,11 @@ export function useClient(): TRPCClient<AppRouter> {
   return $client;
 }
 
-export function useClientHeaders(
-  initialValue: MaybeRef<Record<string, any>> = {}
-): Ref<Record<string, any>> {
-  return useStorage('trpc-nuxt-header', initialValue);
+export function useClientHeaders(): Ref<Record<string, any>> {
+  if (import.meta.env.SSR) {
+    return useState('ssr-trpc-headers', () => ({}));
+  }
+  return useStorage('trpc-nuxt-header', {});
 }
 
 export type TrpcQueryOptions<TPath extends TrpcQueryPath> = UseQueryOptions<

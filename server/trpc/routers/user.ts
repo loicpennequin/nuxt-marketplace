@@ -1,8 +1,14 @@
 import { createUserDto, findUserByIdDto } from '~~/dtos/user.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
+import { User } from '@prisma/client';
 
 export const userRouter = createRouter()
+  .query('me', {
+    resolve({ ctx }) {
+      return ctx.event.context.user as User;
+    }
+  })
   .query('findAll', {
     resolve({ ctx }) {
       return ctx.prisma.user.findMany();

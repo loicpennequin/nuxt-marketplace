@@ -1,29 +1,34 @@
-import { extendPages, defineNuxtModule } from "@nuxt/kit";
-import chalk from "chalk";
-import logSymbols from "log-symbols";
-import prettier from "prettier";
-import fs from "fs";
-import { fileURLToPath } from "url";
-import { dirname, resolve } from "pathe";
-import mkdirp from "mkdirp";
+// THIS IS A COPY-PASTE OF THE TYPED ROUTR PACKAGE
+// WITHOUT THE REFERENCE TO LODASH-ES
+// USING LODASH-ES METHOD IN NUXT.CONFIG.TS CRASHES THE APP
+// REMOVE THIS AND USE THE NORMAL NPM PACKAGE ONCE THIS IS FIXED
+
+import { extendPages, defineNuxtModule } from '@nuxt/kit';
+import chalk from 'chalk';
+import logSymbols from 'log-symbols';
+import prettier from 'prettier';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'pathe';
+import mkdirp from 'mkdirp';
 
 const camelCase = (str: string) => {
   return str
     .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase();
     })
-    .replace(/\s+/g, "");
+    .replace(/\s+/g, '');
 };
 
 const { resolveConfig, format } = prettier;
 const defaultPrettierOptions = {
   printWidth: 100,
   tabWidth: 2,
-  trailingComma: "es5",
+  trailingComma: 'es5',
   singleQuote: true,
   semi: true,
   bracketSpacing: true,
-  htmlWhitespaceSensitivity: "strict",
+  htmlWhitespaceSensitivity: 'strict'
 };
 async function formatOutputWithPrettier(template) {
   try {
@@ -33,14 +38,14 @@ async function formatOutputWithPrettier(template) {
     }
     const formatedTemplate = format(template, {
       ...prettierFoundOptions,
-      parser: "typescript",
+      parser: 'typescript'
     });
     return formatedTemplate;
   } catch (e) {
     console.error(
       logSymbols.error,
-      chalk.red("Error while formatting the output"),
-      "\n" + e
+      chalk.red('Error while formatting the output'),
+      '\n' + e
     );
     return Promise.reject(e);
   }
@@ -55,9 +60,9 @@ async function saveRouteFiles(outDir, srcDir, fileName, content) {
     if (fs.existsSync(outputFile)) {
       await writeFile(outputFile, formatedContent);
     } else {
-      let dirList = outputFile.split("/");
+      const dirList = outputFile.split('/');
       dirList.pop();
-      const dirPath = dirList.join("/");
+      const dirPath = dirList.join('/');
       await mkdirp(dirPath);
       await writeFile(outputFile, formatedContent);
     }
@@ -78,7 +83,7 @@ async function writeFile(path, content) {
 }
 
 function extractMatchingSiblings(mainRoute, siblingRoutes) {
-  return siblingRoutes?.filter((s) => {
+  return siblingRoutes?.filter(s => {
     const chunkName = extractChunkMain(mainRoute.file);
     if (chunkName && s.name) {
       const siblingChunkName = extractChunkMain(s.file);
@@ -89,7 +94,7 @@ function extractMatchingSiblings(mainRoute, siblingRoutes) {
   });
 }
 function extractUnMatchingSiblings(mainRoute, siblingRoutes) {
-  return siblingRoutes?.filter((s) => {
+  return siblingRoutes?.filter(s => {
     const chunkName = extractChunkMain(mainRoute.file);
     if (chunkName) {
       const siblingChunkName = extractChunkMain(s.file);
@@ -100,22 +105,22 @@ function extractUnMatchingSiblings(mainRoute, siblingRoutes) {
   });
 }
 function extractChunkMain(chunkName) {
-  let chunkArray = chunkName?.split("/");
-  return chunkArray?.join("/");
+  const chunkArray = chunkName?.split('/');
+  return chunkArray?.join('/');
 }
 
 const routeParamExtractRegxp = /:(\w+)/;
 function extractRouteParamsFromPath(path, previousParams) {
   const params = path.match(routeParamExtractRegxp) ?? [];
   params?.shift();
-  let allMergedParams = params.map((m) => ({
+  let allMergedParams = params.map(m => ({
     key: m,
-    type: "string | number",
-    required: true,
+    type: 'string | number',
+    required: true
   }));
   if (previousParams?.length) {
     allMergedParams = allMergedParams.concat(
-      previousParams.map((m) => ({ ...m, required: false }))
+      previousParams.map(m => ({ ...m, required: false }))
     );
   }
   return allMergedParams;
@@ -126,29 +131,29 @@ function isItemLast(array, index) {
 }
 function constructRouteMap(routesConfig) {
   try {
-    let routesObjectTemplate = "{";
-    let routesDeclTemplate = "{";
-    let routesList = [];
-    let routesParams = [];
+    const routesObjectTemplate = '{';
+    const routesDeclTemplate = '{';
+    const routesList = [];
+    const routesParams = [];
     const output = {
       routesObjectTemplate,
       routesDeclTemplate,
       routesList,
-      routesParams,
+      routesParams
     };
     startGeneratorProcedure({
       output,
-      routesConfig,
+      routesConfig
     });
     return output;
   } catch (e) {
-    throw new Error("Generation failed");
+    throw new Error('Generation failed');
   }
 }
 function startGeneratorProcedure({ output, routesConfig }) {
   routesConfig.forEach((route, index) => {
     const rootSiblingsRoutes = routesConfig.filter(
-      (rt) => rt.chunkName !== route.chunkName
+      rt => rt.chunkName !== route.chunkName
     );
     // @ts-ignore
     walkThoughRoutes({
@@ -156,11 +161,11 @@ function startGeneratorProcedure({ output, routesConfig }) {
       level: 0,
       output,
       siblings: rootSiblingsRoutes,
-      isLast: isItemLast(routesConfig, index),
+      isLast: isItemLast(routesConfig, index)
     });
   });
-  output.routesObjectTemplate += "}";
-  output.routesDeclTemplate += "}";
+  output.routesObjectTemplate += '}';
+  output.routesDeclTemplate += '}';
 }
 function walkThoughRoutes({
   route,
@@ -169,23 +174,23 @@ function walkThoughRoutes({
   parentName,
   previousParams,
   output,
-  isLast,
+  isLast
 }) {
   const matchingSiblings = extractMatchingSiblings(route, siblings);
-  const haveMatchingSiblings = !!matchingSiblings?.length && route.path !== "/";
-  const chunkArray = route.file?.split("/") ?? [];
-  const lastChunkArray = chunkArray[chunkArray?.length - 1].split(".vue")[0];
-  const isRootSibling = lastChunkArray === "index";
+  const haveMatchingSiblings = !!matchingSiblings?.length && route.path !== '/';
+  const chunkArray = route.file?.split('/') ?? [];
+  const lastChunkArray = chunkArray[chunkArray?.length - 1].split('.vue')[0];
+  const isRootSibling = lastChunkArray === 'index';
   if (
     (route.children?.length && !haveMatchingSiblings) ||
     (!route.children?.length && haveMatchingSiblings && isRootSibling)
   ) {
-    let childrenChunks = haveMatchingSiblings
+    const childrenChunks = haveMatchingSiblings
       ? matchingSiblings
       : route.children;
-    const splittedPaths = route.path.split("/");
+    const splittedPaths = route.path.split('/');
     const parentPath = splittedPaths[splittedPaths.length - 1];
-    const nameKey = camelCase(parentPath || "index");
+    const nameKey = camelCase(parentPath || 'index');
     output.routesObjectTemplate += `${nameKey}:{`;
     output.routesDeclTemplate += `"${nameKey}":{`;
     const allRouteParams = extractRouteParamsFromPath(
@@ -200,23 +205,23 @@ function walkThoughRoutes({
         parentName: nameKey,
         previousParams: allRouteParams,
         output,
-        isLast: isItemLast(childrenChunks, index),
+        isLast: isItemLast(childrenChunks, index)
       })
     );
-    output.routesObjectTemplate += "},";
-    output.routesDeclTemplate += `}${isLast ? "" : ","}`;
+    output.routesObjectTemplate += '},';
+    output.routesDeclTemplate += `}${isLast ? '' : ','}`;
   } else if (route.name) {
     let splitted = [];
-    splitted = route.name.split("-");
+    splitted = route.name.split('-');
     splitted = splitted.slice(level, splitted.length);
     if (splitted[0] === parentName) {
       splitted.splice(0, 1);
     }
     const keyName =
-      route.path === "" ? "index" : camelCase(splitted.join("-")) || "index";
+      route.path === '' ? 'index' : camelCase(splitted.join('-')) || 'index';
     output.routesObjectTemplate += `'${keyName}': '${route.name}' as const,`;
     output.routesDeclTemplate += `"${keyName}": "${route.name}"${
-      isLast ? "" : ","
+      isLast ? '' : ','
     }`;
     output.routesList.push(route.name);
     const allRouteParams = extractRouteParamsFromPath(
@@ -225,7 +230,7 @@ function walkThoughRoutes({
     );
     output.routesParams.push({
       name: route.name,
-      params: allRouteParams,
+      params: allRouteParams
     });
   }
 }
@@ -383,7 +388,7 @@ function createRuntimeIndexFile() {
 function createRuntimeRoutesFile({
   routesList,
   routesObjectTemplate,
-  routesObjectName,
+  routesObjectName
 }) {
   return `
     ${signatureTemplate}
@@ -396,7 +401,7 @@ function createRuntimeRoutesFile({
 function createDeclarationRoutesFile({
   routesDeclTemplate,
   routesList,
-  routesParams,
+  routesParams
 }) {
   return `
     ${signatureTemplate}
@@ -411,8 +416,8 @@ function createDeclarationRoutesFile({
 }
 function createTypedRouteListExport(routesList) {
   return `export type TypedRouteList = ${routesList
-    .map((m) => `'${m}'`)
-    .join("|\n")}`;
+    .map(m => `'${m}'`)
+    .join('|\n')}`;
 }
 function createTypedRouteParamsExport(routesParams) {
   return `export type TypedRouteParams = {
@@ -425,29 +430,29 @@ function createTypedRouteParamsExport(routesParams) {
           ${params
             .map(
               ({ key, required, type }) =>
-                `"${key}"${required ? "" : "?"}: ${type}`
+                `"${key}"${required ? '' : '?'}: ${type}`
             )
-            .join(",\n")}
+            .join(',\n')}
         }`
-              : "never"
+              : 'never'
           }`
       )
-      .join(",\n")}
+      .join(',\n')}
   }`;
 }
 
 function routeHook(outDir, routesObjectName, srcDir, nuxt) {
   try {
-    extendPages(async (routes) => {
+    extendPages(async routes => {
       if (routes.length) {
         const {
           routesDeclTemplate,
           routesList,
           routesObjectTemplate,
-          routesParams,
+          routesParams
         } = constructRouteMap(routes);
-        const pluginName = "__typed-router.ts";
-        nuxt.hook("build:done", async () => {
+        const pluginName = '__typed-router.ts';
+        nuxt.hook('build:done', async () => {
           const pluginFolder = `${srcDir}/plugins`;
           await saveRouteFiles(
             pluginFolder,
@@ -460,7 +465,7 @@ function routeHook(outDir, routesObjectName, srcDir, nuxt) {
           saveRouteFiles(
             outDir,
             srcDir,
-            "__useTypedRouter.ts",
+            '__useTypedRouter.ts',
             createRuntimeHookFile(routesDeclTemplate)
           ),
           saveRouteFiles(
@@ -470,7 +475,7 @@ function routeHook(outDir, routesObjectName, srcDir, nuxt) {
             createRuntimeRoutesFile({
               routesList,
               routesObjectTemplate,
-              routesObjectName,
+              routesObjectName
             })
           ),
           saveRouteFiles(
@@ -480,10 +485,10 @@ function routeHook(outDir, routesObjectName, srcDir, nuxt) {
             createDeclarationRoutesFile({
               routesDeclTemplate,
               routesList,
-              routesParams,
+              routesParams
             })
           ),
-          saveRouteFiles(outDir, srcDir, "index.ts", createRuntimeIndexFile()),
+          saveRouteFiles(outDir, srcDir, 'index.ts', createRuntimeIndexFile())
         ]);
         console.log(
           logSymbols.success,
@@ -494,9 +499,9 @@ function routeHook(outDir, routesObjectName, srcDir, nuxt) {
           logSymbols.warning,
           chalk.yellow(
             `[typed-router] No routes defined. Check if your ${chalk.underline(
-              chalk.bold("pages")
+              chalk.bold('pages')
             )} folder exists and remove ${chalk.underline(
-              chalk.bold("app.vue")
+              chalk.bold('app.vue')
             )}`
           )
         );
@@ -504,27 +509,27 @@ function routeHook(outDir, routesObjectName, srcDir, nuxt) {
     });
   } catch (e) {
     console.error(
-      chalk.red("Error while generating routes definitions model"),
-      "\n" + e
+      chalk.red('Error while generating routes definitions model'),
+      '\n' + e
     );
   }
 }
 
 const module = defineNuxtModule({
   meta: {
-    name: "nuxt-typed-router",
-    configKey: "nuxtTypedRouter",
-    compatibility: { nuxt: "^3.0.0", bridge: false },
+    name: 'nuxt-typed-router',
+    configKey: 'nuxtTypedRouter',
+    compatibility: { nuxt: '^3.0.0', bridge: false }
   },
   setup(moduleOptions, nuxt) {
     const srcDir = nuxt.options.srcDir;
-    const { outDir = `./generated`, routesObjectName = "routerPagesNames" } =
+    const { outDir = `./generated`, routesObjectName = 'routerPagesNames' } =
       moduleOptions;
-    nuxt.hook("pages:extend", () =>
+    nuxt.hook('pages:extend', () =>
       routeHook(outDir, routesObjectName, srcDir, nuxt)
     );
     routeHook(outDir, routesObjectName, srcDir, nuxt);
-  },
+  }
 });
 
 export { module as default };

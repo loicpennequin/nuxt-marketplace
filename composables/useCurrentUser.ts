@@ -1,18 +1,15 @@
 export const useCurrentUser = () => {
-  const { decodedJwt } = useJwt();
+  const { jwt } = useJwt();
   const opts = computed(() => ({
-    enabled: !!decodedJwt.value
+    enabled: !!jwt.value
   }));
 
-  const query = useTrpcQuery(
-    computed(() => ['user.findById', decodedJwt.value?.sub]),
-    opts
-  );
+  const query = useTrpcQuery(['user.me'], opts);
 
   return {
     ...query,
     suspense() {
-      if (!decodedJwt.value) return;
+      if (!jwt.value) return;
       return query.suspense();
     }
   };

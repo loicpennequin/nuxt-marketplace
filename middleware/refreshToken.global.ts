@@ -2,8 +2,8 @@ import { appendHeader } from 'h3';
 
 export default defineNuxtRouteMiddleware(async () => {
   if (!import.meta.env.SSR) return;
-
   try {
+    console.log('=======================================');
     const { jwt } = useJwt();
     const res: any = await $fetch.raw('/trpc/auth.refreshToken', {
       method: 'POST',
@@ -14,7 +14,6 @@ export default defineNuxtRouteMiddleware(async () => {
     for (const cookie of cookies) {
       appendHeader(useRequestEvent(), 'set-cookie', cookie);
     }
-
     jwt.value = res._data.result.data?.accessToken as string;
   } catch (err) {
     console.error(err);

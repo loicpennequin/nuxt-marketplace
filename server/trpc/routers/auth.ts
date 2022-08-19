@@ -67,26 +67,23 @@ export const authRouter = createRouter()
       const refreshToken = getCookie(ctx.event, 'refresh_token');
 
       if (!refreshToken) {
-        throw createError({
-          statusCode: 401,
-          statusMessage: 'Bad Credentials.'
-        });
+        console.error('no refresh token - skipping');
+        return { accessToken: null };
       }
 
       const account = await ctx.prisma.account.findFirst({
-        where: { refreshToken },
-        include: { user: true }
+        select: { userId: true, id: true },
+        where: { refreshToken }
       });
 
       if (!account) {
-        throw createError({
-          statusCode: 401,
-          statusMessage: 'Bad Credentials.'
-        });
+        console.error('invalid refreshToken', refreshToken);
+        deleteCookie(ctx.event, 'refresh_token');
+        return { accessToken: null };
       }
 
       const tokens = {
-        accessToken: generateJWT(account.user.id),
+        accessToken: generateJWT(account.userId),
         refreshToken: generateRefreshToken()
       };
 

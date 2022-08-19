@@ -1,39 +1,31 @@
 export const useAuth = () => {
-  const headers = useClientHeaders();
   const { jwt } = useJwt();
-
-  if (jwt.value) {
-    headers.value.Authorization = `Bearer ${jwt.value}`;
-  }
 
   const loginMutation = useTrpcMutation('auth.login', {
     onSuccess(data) {
       jwt.value = data.accessToken;
-      headers.value.Authorization = `Bearer ${jwt.value}`;
     }
   });
 
   const refreshTokenMutation = useTrpcMutation('auth.refreshToken', {
     onSuccess(data) {
       jwt.value = data.accessToken;
-      headers.value.Authorization = `Bearer ${jwt.value}`;
     }
   });
 
   const logoutMutation = useTrpcMutation('auth.logout', {
     onSuccess() {
       jwt.value = undefined;
-      delete headers.value.Authorization;
     }
   });
 
   return {
     isLoggedIn: computed(() => !!jwt.value),
-    login: loginMutation.mutate,
+    login: loginMutation.mutateAsync,
     loginMutation,
-    refreshToken: refreshTokenMutation.mutate,
+    refreshToken: refreshTokenMutation.mutateAsync,
     refreshTokenMutation,
-    logout: logoutMutation.mutate,
+    logout: logoutMutation.mutateAsync,
     logoutMutation
   };
 };

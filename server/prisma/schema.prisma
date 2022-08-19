@@ -25,10 +25,12 @@ model User {
 
 model Account {
   id                    String  @id @default(cuid())
-  refreshToken          String? @db.VarChar(2000)
+  refreshToken          String? @db.VarChar(200)
   refreshTokenExpiresIn Int?
   userId                String  @unique
   user                  User    @relation(fields: [userId], references: [id])
+
+  @@index(fields: [refreshToken])
 }
 
 model Product {
