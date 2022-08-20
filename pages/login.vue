@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useForm, Field } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { loginDto, LoginDto } from '@/dtos/auth.dto';
 
@@ -14,7 +14,6 @@ const form = useForm<LoginDto>({
 });
 
 const { router, routes } = useTypedRouter();
-
 const onSubmit = form.handleSubmit(async values => {
   await login(values);
   router.push({ name: routes.index });
@@ -27,29 +26,16 @@ const onSubmit = form.handleSubmit(async values => {
       <form space-y-5 @submit.prevent="onSubmit">
         <div space-y-2>
           <label for="signup-email">Email</label>
-          <Field
-            id="signup-email"
-            bg-light-3
-            dark:bg-dark-3
-            name="email"
-            p-2
-            type="email"
-            block
-            w-full
-          />
+          <UiTextInput id="signup-email" name="email" type="email" />
         </div>
 
         <div space-y-2>
           <label for="signup-password">Password</label>
-          <Field
-            id="signup-passwprd"
-            bg-light-3
-            dark:bg-dark-3
+          <UiTextInput
+            id="signup-password"
             name="password"
-            p-2
             type="password"
-            block
-            w-full
+            right-icon="eye"
           />
         </div>
         <button
@@ -66,6 +52,8 @@ const onSubmit = form.handleSubmit(async values => {
           Sign in
         </button>
       </form>
+
+      <pre p-3 m-2 bg-dark-3>{{ form.values }}</pre>
       <p text-xs max-w="40ch" m-t="!10" color-dark-3 dark:color-light-3>
         By signing in, you agree to our Terms of Service and Privacy Policy.
       </p>

@@ -23,7 +23,7 @@ const vModel = computed({
     flex
     gap="2"
     items-center
-    outline="4 solid transparent focus-within:slate-300"
+    outline="3 solid transparent focus-within:blue-300"
     p="1"
     rounded="full"
     text-xs

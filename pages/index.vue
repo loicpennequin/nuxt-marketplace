@@ -4,7 +4,7 @@ const { data: users, error, isLoading } = useTrpcQuery(['user.findAll']);
 
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
+    <div v-if="isLoading" flex justify-center><UiSpinner /></div>
     <div v-else-if="error">An error has occured.</div>
     <div v-else-if="users && !users.length">There are no users yet.</div>
     <ul v-else-if="users">
