@@ -23,7 +23,7 @@ const vModel = computed({
     flex
     gap="2"
     items-center
-    outline="3 solid transparent focus-within:blue-300"
+    outline="3 solid transparent focus-within:brand-300"
     p="1"
     rounded="full"
     text-xs
@@ -44,7 +44,7 @@ const vModel = computed({
       p-x="1"
       relative
       rounded-full
-      un-after="absolute top-0  w-4 h-4 rounded-full bg-blue-500  duration-200"
+      un-after="absolute top-0  w-4 h-4 rounded-full bg-brand-400  duration-200"
       w="10"
     />
     <slot name="on" />

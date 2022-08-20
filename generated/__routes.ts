@@ -5,8 +5,9 @@
  * */
 
 export const routerPagesNames = {
+  'cms-Page': 'cms-page' as const,
   index: 'index' as const,
   login: 'login' as const
 };
 
-export type TypedRouteList = 'index' | 'login';
+export type TypedRouteList = 'cms-page' | 'index' | 'login';

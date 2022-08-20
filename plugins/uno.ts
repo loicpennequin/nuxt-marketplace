@@ -34,12 +34,36 @@ export default defineNuxtPlugin(() => {
         }
       ])
     );
-    console.log(uiIcons);
+
     initUnocssRuntime({
       defaults: {
+        theme: {
+          colors: {
+            brand: {
+              '1': '#c1e8de',
+              '2': '#89d4c1',
+              '3': '#3fb99a',
+              '4': '#21a785',
+              '5': '#1c8d70',
+              '6': '#17775e',
+              '7': '#13604c',
+              '8': '#105140',
+              '9': '#0b3a2e',
+              '100': '#c1e8de',
+              '200': '#89d4c1',
+              '300': '#3fb99a',
+              '400': '#21a785',
+              '500': '#1c8d70',
+              '600': '#17775e',
+              '700': '#13604c',
+              '800': '#105140',
+              '900': '#0b3a2e'
+            }
+          }
+        },
         // @ts-ignore
         presets: [
-          presetWind(),
+          presetWind(presetWind()),
           presetAttributify(),
           presetIcons({
             collections: {

@@ -15,21 +15,34 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div flex gap="0" bg-light-3 dark:bg-dark-3 p-2>
-    <slot name="left">
-      <div v-if="props.leftIcon" :i-ui="props.leftIcon" w-5 h-5 />
-    </slot>
+  <div
+    flex
+    items-center
+    gap="0"
+    bg-light-3
+    dark:bg-dark-3
+    border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
+  >
+    <div v-if="$slots.left || props.leftIcon" m-l-2 self-stretch>
+      <slot name="left">
+        <div :i-ui="props.leftIcon" h-full aspect-square />
+      </slot>
+    </div>
     <Field
       :id="props.id"
       :name="props.name"
       :type="props.type"
       flex-1
-      bg-transparent
+      bg-inherit
+      color-inherit
+      p="x-3 y-2"
       outline="focus:none"
     />
 
-    <slot name="right">
-      <div v-if="props.rightIcon" :i-ui="props.rightIcon" w-5 h-5 />
-    </slot>
+    <div v-if="$slots.right || props.rightIcon" m-r-2 self-stretch>
+      <slot name="right">
+        <div :i-ui="props.rightIcon" h-full aspect-square />
+      </slot>
+    </div>
   </div>
 </template>

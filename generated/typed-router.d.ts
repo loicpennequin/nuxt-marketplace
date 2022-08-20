@@ -13,9 +13,16 @@ import type {
 } from 'vue-router';
 import type { TypedRouteList } from './__routes';
 
-export type RouteListDecl = { index: 'index'; login: 'login' };
+export type RouteListDecl = {
+  'cms-Page': 'cms-page';
+  index: 'index';
+  login: 'login';
+};
 
 export type TypedRouteParams = {
+  'cms-page': {
+    page: string | number;
+  };
   index: never;
   login: never;
 };

@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import { Field } from 'vee-validate';
+const props = defineProps<{
+  name: string;
+  id: string;
+}>();
 
-const props = defineProps<{ name: string }>();
+const isPasswordShown = ref(false);
+const type = computed(() => (isPasswordShown.value ? 'text' : 'password'));
 </script>
 
 <template>
-  <Field :name="props.name" bg-light-3 dark:bg-dark-3 p-2 block w-full />
+  <UiTextInput :id="props.id" :name="props.name" :type="type">
+    <template #right>
+      <button
+        type="button"
+        h-full
+        aspect-square
+        :i-ui="isPasswordShown ? 'eye-slash' : 'eye'"
+        @click="isPasswordShown = !isPasswordShown"
+      />
+    </template>
+  </UiTextInput>
 </template>

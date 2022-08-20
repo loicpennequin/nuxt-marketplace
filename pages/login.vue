@@ -4,7 +4,9 @@ import { toFormValidator } from '@vee-validate/zod';
 import { loginDto, LoginDto } from '@/dtos/auth.dto';
 
 const validationSchema = toFormValidator(loginDto);
-const { login } = useAuth();
+const {
+  loginMutation: { isLoading, mutateAsync: login }
+} = useAuth();
 const form = useForm<LoginDto>({
   validationSchema,
   initialValues: {
@@ -22,7 +24,8 @@ const onSubmit = form.handleSubmit(async values => {
 
 <template>
   <div flex items-center justify-center h-full>
-    <UiSurface>
+    <UiSurface p="8">
+      <Logo m="x-auto b-8" w-50 block m-x-auto />
       <form space-y-5 @submit.prevent="onSubmit">
         <div space-y-2>
           <label for="signup-email">Email</label>
@@ -31,31 +34,35 @@ const onSubmit = form.handleSubmit(async values => {
 
         <div space-y-2>
           <label for="signup-password">Password</label>
-          <UiTextInput
-            id="signup-password"
-            name="password"
-            type="password"
-            right-icon="eye"
-          />
+          <UiPasswordInput id="signup-password" name="password" />
         </div>
-        <button
-          bg-blue-5
-          color-white
-          cursor-pointer
-          font-xl
-          mt-5
-          p="x-16 y-2"
-          self-start
-          block
-          w-full
-        >
+        <UiButton mt-5 self-start w-full :is-loading="isLoading">
           Sign in
-        </button>
+        </UiButton>
       </form>
 
-      <pre p-3 m-2 bg-dark-3>{{ form.values }}</pre>
-      <p text-xs max-w="40ch" m-t="!10" color-dark-3 dark:color-light-3>
-        By signing in, you agree to our Terms of Service and Privacy Policy.
+      <p text-xs max-w="40ch" m-t="!10" color-dark-5 dark:color-light-5>
+        By signing in, you agree to our
+        <NuxtLink
+          color="brand-6 dark:brand-2"
+          :to="{
+            name: routes['cms-Page'],
+            params: { page: 'termes-of-service' }
+          }"
+        >
+          Terms of Service
+        </NuxtLink>
+        and
+        <NuxtLink
+          color="brand-6 dark:brand-2"
+          :to="{
+            name: routes['cms-Page'],
+            params: { page: 'privacy-policy' }
+          }"
+        >
+          Privacy policy
+        </NuxtLink>
+        .
       </p>
     </UiSurface>
   </div>
