@@ -1,31 +1,41 @@
+import { InferMutationOptions } from './trpc';
+
 export const useAuth = () => {
   const { jwt } = useJwt();
 
-  const loginMutation = useTrpcMutation('auth.login', {
-    onSuccess(data) {
-      jwt.value = data.accessToken;
-    }
-  });
+  const loginMutation = (options: InferMutationOptions<'auth.login'> = {}) =>
+    useTrpcMutation('auth.login', {
+      ...options,
+      onSuccess(data, variables, context) {
+        jwt.value = data.accessToken;
+        options?.onSuccess?.(data, variables, context);
+      }
+    });
 
-  const refreshTokenMutation = useTrpcMutation('auth.refreshToken', {
-    onSuccess(data) {
-      jwt.value = data.accessToken;
-    }
-  });
+  const refreshTokenMutation = (
+    options: InferMutationOptions<'auth.refreshToken'> = {}
+  ) =>
+    useTrpcMutation('auth.refreshToken', {
+      ...options,
+      onSuccess(data, variables, context) {
+        jwt.value = data.accessToken;
+        options?.onSuccess?.(data, variables, context);
+      }
+    });
 
-  const logoutMutation = useTrpcMutation('auth.logout', {
-    onSuccess() {
-      jwt.value = undefined;
-    }
-  });
+  const logoutMutation = (options: InferMutationOptions<'auth.logout'> = {}) =>
+    useTrpcMutation('auth.logout', {
+      ...options,
+      onSuccess(data, variables, context) {
+        jwt.value = undefined;
+        options?.onSuccess?.(data, variables, context);
+      }
+    });
 
   return {
     isLoggedIn: computed(() => !!jwt.value),
-    login: loginMutation.mutateAsync,
     loginMutation,
-    refreshToken: refreshTokenMutation.mutateAsync,
     refreshTokenMutation,
-    logout: logoutMutation.mutateAsync,
     logoutMutation
   };
 };

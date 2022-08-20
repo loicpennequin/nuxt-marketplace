@@ -17,6 +17,12 @@ export default defineNuxtPlugin(nuxtApp => {
         ...unref(otherHeaders),
         ...headers
       };
+    },
+    fetch(...args: [any, any]) {
+      return globalThis.$fetch.raw(...args).then(response => ({
+        ...response,
+        json: () => response._data
+      }));
     }
   });
 

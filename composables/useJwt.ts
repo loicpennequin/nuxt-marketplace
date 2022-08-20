@@ -1,20 +1,19 @@
+import jwtDecode from 'jwt-decode';
 import { Maybe } from '~~/utils/types';
 
+type DecodedJWT = {
+  sub: string;
+  exp: number;
+  iat: number;
+};
 export const useJwt = () => {
   const jwt = useState<Maybe<string>>('jwt');
-  const headers = useClientHeaders();
-
-  const setHeader = () => {
-    if (jwt.value) {
-      headers.value.authorization = `Bearer ${jwt.value}`;
-    } else {
-      delete headers.value.authorization;
-    }
-  };
-
-  watch(jwt, setHeader, { immediate: true });
+  const decodedJwt = computed(
+    () => jwt.value && jwtDecode<DecodedJWT>(jwt.value)
+  );
 
   return {
-    jwt
+    jwt,
+    decodedJwt
   };
 };

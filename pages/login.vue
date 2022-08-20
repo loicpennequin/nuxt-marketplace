@@ -4,9 +4,8 @@ import { toFormValidator } from '@vee-validate/zod';
 import { loginDto, LoginDto } from '@/dtos/auth.dto';
 
 const validationSchema = toFormValidator(loginDto);
-const {
-  loginMutation: { isLoading, mutateAsync: login }
-} = useAuth();
+const { loginMutation } = useAuth();
+const { isLoading, mutateAsync: login } = loginMutation();
 const form = useForm<LoginDto>({
   validationSchema,
   initialValues: {

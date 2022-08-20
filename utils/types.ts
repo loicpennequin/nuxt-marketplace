@@ -30,6 +30,7 @@ export type TMutations = AppRouter['_def']['mutations'];
 export type TMutationValues = inferProcedures<AppRouter['_def']['mutations']>;
 
 export type TrpcQueryPath = keyof TQueryValues & string;
+export type TrpcMutationPath = keyof TMutationValues & string;
 
 export type InferQueryOutput<TRouteKey extends keyof TQueryValues & string> =
   inferProcedureOutput<TQueries[TRouteKey]>;

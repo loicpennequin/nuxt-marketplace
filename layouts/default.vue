@@ -2,7 +2,8 @@
 const { data: currentUser, suspense } = useCurrentUser();
 onServerPrefetch(suspense);
 
-const { logout, isLoggedIn } = useAuth();
+const { logoutMutation, isLoggedIn } = useAuth();
+const { mutate: logout } = logoutMutation();
 const onLogout = () => logout(null);
 const { routes } = useTypedRouter();
 </script>
