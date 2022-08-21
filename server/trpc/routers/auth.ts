@@ -2,6 +2,7 @@ import { loginDto } from '~~/dtos/auth.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
 import { generateJWT, generateRefreshToken } from '~~/utils/helpers/tokens';
+import { TRPCError } from '@trpc/server';
 
 export const authRouter = createRouter()
   .mutation('login', {
@@ -12,7 +13,7 @@ export const authRouter = createRouter()
       });
 
       if (!user) {
-        throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
 
       const isPasswordValid = await bcrypt.compare(
@@ -20,7 +21,7 @@ export const authRouter = createRouter()
         user.passwordHash
       );
       if (!isPasswordValid) {
-        throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
 
       const tokens = {

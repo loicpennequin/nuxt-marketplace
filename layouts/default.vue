@@ -25,7 +25,7 @@ const { routes } = useTypedRouter();
             <button
               aspect-square
               p-3
-              h-10
+              h-8
               bg-brand-3
               flex
               justify-center

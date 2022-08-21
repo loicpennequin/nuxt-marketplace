@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Field } from 'vee-validate';
+import { Maybe } from '~~/utils/types';
 
 const props = withDefaults(
   defineProps<{
+    modelValue: Maybe<string>;
     name: string;
     type?: string;
     id: string;
@@ -12,6 +13,12 @@ const props = withDefaults(
   }>(),
   { type: 'text', leftIcon: undefined, rightIcon: undefined }
 );
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+}>();
+
+const vModel = useVModel(props, 'modelValue', emit);
 </script>
 
 <template>
@@ -28,7 +35,8 @@ const props = withDefaults(
         <div :i-ui="props.leftIcon" h-full aspect-square />
       </slot>
     </div>
-    <Field
+    <input
+      v-model="vModel"
       :id="props.id"
       :name="props.name"
       :type="props.type"

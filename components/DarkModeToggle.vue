@@ -25,9 +25,9 @@ const isDarkMode = computed({
 
 <style lang="scss">
 body.color-mode--animating {
-  --at-apply: 'transition-colors duration-300';
+  --at-apply: 'transition-colors duration-200';
   * {
-    --at-apply: 'transition-colors duration-300';
+    --at-apply: 'transition-colors duration-200';
   }
 }
 </style>

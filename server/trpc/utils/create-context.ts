@@ -1,6 +1,7 @@
 import { verifyJwt } from '~~/utils/helpers/tokens';
 import prisma from '../../prisma/client';
 import { CompatibilityEvent } from 'h3';
+import { TRPCError } from '@trpc/server';
 
 export type TrpcContext = {
   event: CompatibilityEvent;
@@ -26,10 +27,7 @@ export const createContext = async (
     }
   } catch (err) {
     console.error(err);
-    throw createError({
-      statusCode: 401,
-      statusMessage: 'Malformed or expired access token.'
-    });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
 
   return {

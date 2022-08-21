@@ -4,23 +4,27 @@ import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders';
 import presetIcons from '@unocss/preset-icons';
 import presetWind from '@unocss/preset-wind';
 import { presetAttributify } from 'unocss';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'url';
+import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite';
 
 export default defineNuxtConfig({
   modules: [
     './modules/typedRouter',
-    '@intlify/nuxt3',
+    // '@intlify/nuxt3',
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@unocss/nuxt'
   ],
 
-  intlify: {
-    vueI18n: {
-      locale: 'en',
-      messages: {}
-    }
-  },
+  // intlify: {
+  //   localeDir: 'locales',
+  //   vueI18n: {
+  //     locale: 'en',
+  //     messages: {}
+  //   }
+  // },
 
   unocss: {
     autoImport: true,
@@ -73,5 +77,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: '',
     refreshTokenSecret: ''
+  },
+  vite: {
+    plugins: [
+      VueI18nVitePlugin({
+        include: [
+          resolve(dirname(fileURLToPath(import.meta.url)), './locales/*.json')
+        ]
+      })
+    ]
   }
 });

@@ -2,6 +2,7 @@ import * as trpc from '@trpc/client';
 import { unref } from 'vue';
 import { defineNuxtPlugin, useRequestHeaders } from '#app';
 import type { router } from '~/server/trpc';
+import { FetchError } from 'ohmyfetch';
 
 declare type AppRouter = typeof router;
 
@@ -18,11 +19,19 @@ export default defineNuxtPlugin(nuxtApp => {
         ...headers
       };
     },
-    fetch(...args: [any, any]) {
-      return globalThis.$fetch.raw(...args).then(response => ({
-        ...response,
-        json: () => response._data
-      }));
+    async fetch(...args: [any, any]) {
+      try {
+        const response = await $fetch.raw(...args);
+        return {
+          ...response,
+          json: () => response._data
+        };
+      } catch (err: any) {
+        if (err instanceof FetchError) {
+          return { json: () => err.data } as Response;
+        }
+        throw err;
+      }
     }
   });
 
