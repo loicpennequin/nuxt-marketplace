@@ -7,7 +7,12 @@
 import { defineNuxtPlugin } from '#app';
 
 export default defineNuxtPlugin(nuxtApp => {
-  const routesList = { 'cms-Page': 'cms-page', index: 'index', login: 'login' };
+  const routesList = {
+    'cms-Page': 'cms-page',
+    index: 'index',
+    login: 'login',
+    register: 'register'
+  };
 
   return {
     provide: {

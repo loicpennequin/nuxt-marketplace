@@ -7,7 +7,8 @@
 export const routerPagesNames = {
   'cms-Page': 'cms-page' as const,
   index: 'index' as const,
-  login: 'login' as const
+  login: 'login' as const,
+  register: 'register' as const
 };
 
-export type TypedRouteList = 'cms-page' | 'index' | 'login';
+export type TypedRouteList = 'cms-page' | 'index' | 'login' | 'register';

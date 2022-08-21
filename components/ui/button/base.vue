@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useSlots } from 'vue';
+import { useSlots, useAttrs } from 'vue';
+import NuxtLink from '#app/components/nuxt-link';
 
 interface Props {
   isFullwidth?: boolean;
@@ -15,10 +16,14 @@ const props = withDefaults(defineProps<Props>(), {
   isLoading: false
 });
 const slots = useSlots();
+
+const attrs = useAttrs();
+const is = computed(() => (attrs.to ? NuxtLink : 'button'));
 </script>
 
 <template>
-  <button
+  <component
+    :is="is"
     cursor-pointer
     select-none
     no-underline
@@ -30,10 +35,9 @@ const slots = useSlots();
     justify-center
     font="bold"
     rounded
-    bg="brand-5 hover:brand-6"
-    color-white
     outline="focus:none"
     ring="transparent focus-visible:brand-2 2"
+    :disabled="isLoading || $attrs.disabled"
   >
     <div v-if="props.leftIcon || slots.left" m-r="2" :m-l="-1">
       <slot name="left">
@@ -59,5 +63,5 @@ const slots = useSlots();
         />
       </slot>
     </div>
-  </button>
+  </component>
 </template>
