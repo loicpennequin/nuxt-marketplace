@@ -2,6 +2,8 @@ import { createUserDto, findUserByIdDto } from '~~/dtos/user.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
+import { computeNextUsernameTag } from '../utils/create-username-tag';
+import { TRPCError } from '@trpc/server';
 
 export const userRouter = createRouter()
   .query('me', {
@@ -22,14 +24,24 @@ export const userRouter = createRouter()
   })
   .mutation('create', {
     input: createUserDto,
-    async resolve({ ctx, input }) {
+    async resolve({ ctx, input: { password, email, ...dto } }) {
+      const exists = await prisma.account.count({ where: { email: email } });
+
+      if (exists) {
+        throw new TRPCError({
+          code: 'CONFLICT',
+          message: 'EMAIL_ALREADY_EXISTS'
+        });
+      }
+
       const account = await ctx.prisma.account.create({
         data: {
+          passwordHash: bcrypt.hashSync(password, 10),
+          email,
           user: {
             create: {
-              username: input.username,
-              email: input.email,
-              passwordHash: bcrypt.hashSync(input.password, 10)
+              ...dto,
+              usernameTag: await computeNextUsernameTag(ctx, dto.username)
             }
           }
         },

@@ -2,6 +2,7 @@
 import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { CreateUserDto, createUserDto } from '~~/dtos/user.dto';
+import { Gender } from '@prisma/client';
 
 const { t, te } = useI18n();
 const { router, routes } = useTypedRouter();
@@ -16,28 +17,39 @@ const {
     router.push({ name: routes.index });
   }
 });
+
 const { handleSubmit } = useForm<CreateUserDto>({
   validationSchema: toFormValidator(createUserDto),
   initialValues: {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    // @ts-ignore - should be provided by user
+    gender: undefined
   }
 });
 
 const onSubmit = handleSubmit(values => signUp(values));
-const submitErrorMessage = computed(() => {
-  if (!error.value) return '';
-  const { httpStatus } = error.value.data;
+const submitErrorMessage = useSubmitError(error);
 
-  return te(`errors.${httpStatus}`)
-    ? t(`errors.${httpStatus}`)
-    : t(`errors.500`);
-});
+const genders = [
+  { label: t('gender.male'), value: Gender.MALE },
+  { label: t('gender.female'), value: Gender.FEMALE },
+  { label: t('gender.other'), value: Gender.OTHER }
+];
 </script>
 
 <template>
   <form space-y-5 @submit.prevent="onSubmit">
+    <UiFormControl
+      id="signin-gender"
+      v-slot="{ on, bind }"
+      name="gender"
+      :label="t('gender.label')"
+    >
+      <UiRadioGroup v-bind="bind" :values="genders" v-on="on" />
+    </UiFormControl>
+
     <UiFormControl
       id="signin-username"
       v-slot="{ on, bind }"
@@ -77,17 +89,25 @@ const submitErrorMessage = computed(() => {
 {
   "en": {
     "submit": "Sign up",
+    "gender": {
+      "label": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
     "username": {
       "label": "Username"
     },
     "email": {
-      "label": "E-mail"
+      "label": "E-mail",
+      "exists": "This e-mail is already in use."
     },
     "password": {
       "label": "Password"
     },
     "errors": {
-      "500": "Something wrong happened, please try again later."
+      "500": "Sorry, we are not able to create your account at this time. Please try again later.",
+      "EMAIL_ALREADY_EXISTS": "An account with this email already exists."
     }
   }
 }

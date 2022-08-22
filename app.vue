@@ -29,7 +29,7 @@ const startRefreshTimeout = () => {
   const { exp } = decodedJwt.value;
   const expirationTimeout = exp * 1000 - new Date().getTime();
   refreshTimeout = setTimeout(() => {
-    refreshToken(null);
+    refreshToken(undefined);
   }, expirationTimeout - 30_000); // refresh token 30 secondes before it expores
 };
 

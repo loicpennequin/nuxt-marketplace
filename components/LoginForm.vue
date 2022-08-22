@@ -26,14 +26,7 @@ const { handleSubmit } = useForm<LoginDto>({
 });
 
 const onSubmit = handleSubmit(values => login(values));
-const submitErrorMessage = computed(() => {
-  if (!error.value) return '';
-  const { httpStatus } = error.value.data;
-
-  return te(`errors.${httpStatus}`)
-    ? t(`errors.${httpStatus}`)
-    : t(`errors.500`);
-});
+const submitErrorMessage = useSubmitError(error);
 </script>
 
 <template>
@@ -61,6 +54,7 @@ const submitErrorMessage = computed(() => {
         </UiLink>
       </div>
     </UiFormControl>
+
     <UiButton mt-5 w-full :is-loading="isLoading" @click="reset">
       {{ t('submit') }}
     </UiButton>
@@ -83,7 +77,7 @@ const submitErrorMessage = computed(() => {
 {
   "en": {
     "submit": "Sign in",
-    "register": "I don't have an account",
+    "register": "Create an account",
     "forgotPassword": "I forgot my password",
 
     "email": {
@@ -93,8 +87,7 @@ const submitErrorMessage = computed(() => {
       "label": "Password"
     },
     "errors": {
-      "401": "Your e-mail or password is incorrect.",
-      "500": "Something wrong happened, please try again later."
+      "401": "Your e-mail or password is incorrect."
     }
   }
 }

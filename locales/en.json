@@ -95,5 +95,9 @@
     "never": "never",
     "map": "map",
     "set": "set"
+  },
+
+  "errors": {
+    "500": "An error has occured"
   }
 }

@@ -8,29 +8,29 @@ export const authRouter = createRouter()
   .mutation('login', {
     input: loginDto,
     async resolve({ ctx, input }) {
-      const user = await ctx.prisma.user.findUnique({
+      const account = await ctx.prisma.account.findUnique({
         where: { email: input.email }
       });
 
-      if (!user) {
+      if (!account) {
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
 
       const isPasswordValid = await bcrypt.compare(
         input.password,
-        user.passwordHash
+        account.passwordHash
       );
       if (!isPasswordValid) {
         throw new TRPCError({ code: 'UNAUTHORIZED' });
       }
 
       const tokens = {
-        accessToken: generateJWT(user.id),
+        accessToken: generateJWT(account.userId),
         refreshToken: generateRefreshToken()
       };
 
       await ctx.prisma.account.update({
-        where: { userId: user.id },
+        where: { id: account.id },
         data: { refreshToken: tokens.refreshToken }
       });
 

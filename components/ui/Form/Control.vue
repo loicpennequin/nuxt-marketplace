@@ -22,7 +22,9 @@ const { t } = useI18n();
 
 <template>
   <div space-y-2>
-    <label v-if="props.label" :for="props.id">{{ props.label }}</label>
+    <label v-if="props.label" :for="props.id" font-semibold>
+      {{ props.label }}
+    </label>
     <slot :bind="bind" :on="on" />
     <UiFormError v-if="errorMessage && meta.touched" :error="errorMessage" />
   </div>
