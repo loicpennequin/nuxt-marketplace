@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
 import { computeNextUsernameTag } from '../utils/create-username-tag';
 import { TRPCError } from '@trpc/server';
+import crypto from 'crypto';
+import { sendMail } from '../services/mail-service';
 
 export const userRouter = createRouter()
   .query('me', {
@@ -37,6 +39,7 @@ export const userRouter = createRouter()
       const account = await ctx.prisma.account.create({
         data: {
           passwordHash: bcrypt.hashSync(password, 10),
+          emailVerifyToken: crypto.randomBytes(20).toString('hex'),
           email,
           user: {
             create: {
@@ -46,6 +49,12 @@ export const userRouter = createRouter()
           }
         },
         include: { user: true }
+      });
+
+      await sendMail({
+        account,
+        subject: `Yarilo - Account verification`,
+        body: `<p>Hello ${account.user.username}, please <a target="_blank" href="http://localhost:3000/api/verify-email?input=${account.emailVerifyToken}">verify your account by clicking this link</a>`
       });
 
       return account.user;

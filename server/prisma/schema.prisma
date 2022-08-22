@@ -23,7 +23,6 @@ model User {
   lastname      String?
   username      String
   usernameTag   String
-  verified      Boolean   @default(false)
   bio           String?
   gender        Gender
   account       Account?
@@ -35,6 +34,8 @@ model User {
 model Account {
   id                    String  @id @default(cuid())
   email                 String  @unique
+  emailVerifyToken      String?
+  emailVerified         Boolean @default(false)
   passwordHash          String
   refreshToken          String? @db.VarChar(200)
   refreshTokenExpiresIn Int?

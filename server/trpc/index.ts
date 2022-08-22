@@ -1,4 +1,3 @@
-import { OnErrorPayload } from 'trpc-nuxt/api';
 import { createRouter } from './utils/create-router';
 export { createContext } from './utils/create-context';
 
