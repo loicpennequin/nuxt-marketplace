@@ -14,8 +14,8 @@
     "db:ui": "prisma studio --schema ./server/prisma/schema.prisma"
   },
   "devDependencies": {
-    "@intlify/unplugin-vue-i18n": "^0.5.0",
     "@intlify/nuxt3": "^0.2.3",
+    "@intlify/unplugin-vue-i18n": "^0.5.0",
     "@nuxtjs/color-mode": "^3.1.4",
     "@types/bcrypt": "^5.0.0",
     "@types/date-fns": "^2.6.0",

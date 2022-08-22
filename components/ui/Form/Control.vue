@@ -24,6 +24,6 @@ const { t } = useI18n();
   <div space-y-2>
     <label v-if="props.label" :for="props.id">{{ props.label }}</label>
     <slot :bind="bind" :on="on" />
-    <UiFormError v-if="errorMessage && meta.touched" :error="t(errorMessage)" />
+    <UiFormError v-if="errorMessage && meta.touched" :error="errorMessage" />
   </div>
 </template>
