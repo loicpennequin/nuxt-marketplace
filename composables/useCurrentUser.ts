@@ -1,7 +1,8 @@
 export const useCurrentUser = () => {
   const { jwt } = useJwt();
   const opts = computed(() => ({
-    enabled: !!jwt.value
+    enabled: !!jwt.value,
+    staleTime: Infinity
   }));
 
   const query = useTrpcQuery(['user.me'], opts);

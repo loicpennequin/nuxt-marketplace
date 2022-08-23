@@ -10,7 +10,7 @@ const { data: users, error, isLoading } = useTrpcQuery(['user.findAll']);
       <div v-else-if="users && !users.length">There are no users yet.</div>
       <ul v-else-if="users">
         <li v-for="user in users" :key="user.id">
-          <pre p-3 border="solid 1 brand-5">{{ user }}</pre>
+          {{ user.username }}#{{ user.usernameTag }}
         </li>
       </ul>
     </UiSurface>

@@ -13,7 +13,6 @@ export default defineNuxtPlugin(nuxtApp => {
     url: `http://localhost:3000/trpc`,
     headers: () => {
       const otherHeaders = useClientHeaders();
-
       return {
         ...unref(otherHeaders),
         ...headers

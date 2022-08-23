@@ -4,14 +4,16 @@ const { data: currentUser } = useCurrentUser();
 </script>
 
 <template>
-  <UiContainer>
-    <UiSurface text-center>
-      <h2 m-b-5 text-xl font-bold>
-        {{ t('title', { user: currentUser?.username }) }}
-      </h2>
-      {{ t('message') }}
-    </UiSurface>
-  </UiContainer>
+  <UiCenter>
+    <UiContainer max-w="screen-md">
+      <UiSurface p="15">
+        <h2 m-b-5 text-2xl font-bold color="brand-600 dark:brand-400">
+          {{ t('title', { user: currentUser?.username }) }}
+        </h2>
+        {{ t('message') }}
+      </UiSurface>
+    </UiContainer>
+  </UiCenter>
 </template>
 
 <i18n lang="json">

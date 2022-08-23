@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { throttle } from 'lodash-es';
 
-const { data: currentUser, suspense } = useCurrentUser();
-onServerPrefetch(suspense);
-
-const { logoutMutation, isLoggedIn } = useAuth();
-const { mutate: logout } = logoutMutation();
-const onLogout = () => logout(null);
+const { isLoggedIn } = useAuth();
 const { routes } = useTypedRouter();
 
 const isCollapsed = ref(false);
@@ -37,29 +32,8 @@ if (!import.meta.env.SSR) {
           <Logo />
         </h1>
 
-        <div flex gap-3 m-l-auto items-center>
-          <template v-if="!isLoggedIn">
-            <NuxtLink :to="{ name: routes.login }">Login</NuxtLink>
-          </template>
-
-          <template v-else>
-            <button
-              aspect-square
-              p-3
-              h-8
-              bg-brand-3
-              flex
-              justify-center
-              items-center
-              rounded="1/2"
-              @click="onLogout"
-            >
-              {{ currentUser?.username.charAt(0) }}
-            </button>
-          </template>
-
-          <DarkModeToggle />
-        </div>
+        <AppHeaderConnectedMenu v-if="isLoggedIn" />
+        <AppHeaderDisconnectedMenu v-else />
       </UiContainer>
     </UiSurface>
   </transition>

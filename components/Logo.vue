@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const colorMode = useColorMode();
 const { routes } = useTypedRouter();
 </script>
 
@@ -11,8 +10,9 @@ const { routes } = useTypedRouter();
       h-full
       w-full
       alt="Daria logo"
-      width="138"
-      height="27"
+      width="60"
+      height="32"
+      loading="lazy"
     />
     <img
       class="app-logo--dark-mode"
@@ -20,8 +20,9 @@ const { routes } = useTypedRouter();
       h-full
       w-full
       alt="Daria logo"
-      width="138"
-      height="27"
+      width="60"
+      height="32"
+      loading="lazy"
     />
   </NuxtLink>
 </template>
