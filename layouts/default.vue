@@ -1,46 +1,10 @@
 <script setup lang="ts">
-const { data: currentUser, suspense } = useCurrentUser();
-onServerPrefetch(suspense);
-
-const { logoutMutation, isLoggedIn } = useAuth();
-const { mutate: logout } = logoutMutation();
-const onLogout = () => logout(null);
 const { routes } = useTypedRouter();
 </script>
 
 <template>
   <div min-h="screen" grid class="layout">
-    <UiSurface is="header" p="y-3 x-5" sticky top-0>
-      <UiContainer flex>
-        <h1 tracking-2 text-xl>
-          <Logo />
-        </h1>
-
-        <div flex gap-3 m-l-auto items-center>
-          <template v-if="!isLoggedIn">
-            <NuxtLink :to="{ name: routes.login }">Login</NuxtLink>
-          </template>
-
-          <template v-else>
-            <button
-              aspect-square
-              p-3
-              h-8
-              bg-brand-3
-              flex
-              justify-center
-              items-center
-              rounded="1/2"
-              @click="onLogout"
-            >
-              {{ currentUser?.username.charAt(0) }}
-            </button>
-          </template>
-
-          <DarkModeToggle />
-        </div>
-      </UiContainer>
-    </UiSurface>
+    <AppHeader />
 
     <main bg-light-4 dark:bg-dark-3 max-w-screen>
       <slot />

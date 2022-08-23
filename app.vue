@@ -48,3 +48,9 @@ watch(
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+body {
+  --at-apply: 'bg-light-4 dark:bg-dark-3';
+}
+</style>
