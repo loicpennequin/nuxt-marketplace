@@ -1,36 +1,30 @@
 <script setup lang="ts">
-import usePopper from '~~/composables/usePopper';
 import { vOnClickOutside } from '@vueuse/components';
+import { getFocusableChildren } from '~~/utils/helpers/dom';
 
-const popperNode = ref<HTMLElement>();
-const triggerNode = ref<HTMLElement>();
+const props = defineProps<{ modelValue: boolean }>();
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string): void;
+}>();
 
-const emit = defineEmits(['close:popper', 'open:popper']);
+const toggleContainerNode = ref<HTMLElement>();
+const isOpened = useVModel(props, 'modelValue', emit);
 
-const options = computed(() => ({
-  arrowPadding: 0,
-  locked: false,
-  offsetDistance: 12,
-  offsetSkid: 0,
-  placement: 'bottom',
-  popperNode: unrefElement(popperNode),
-  triggerNode: unref(triggerNode)
-}));
+const { close, toggleNode, toggle } = useDropdownProvider(isOpened);
 
-const { open, close, isOpen } = usePopper(emit, options);
-
-const toggle = () => (isOpen.value ? close() : open());
+watchEffect(() => {
+  toggleNode.value = getFocusableChildren(toggleContainerNode.value)[0];
+});
 </script>
 
 <template>
   <div v-on-click-outside="close">
-    <div ref="triggerNode">
+    <div ref="toggleContainerNode">
       <slot name="toggle" :on="{ click: toggle }" />
     </div>
-    <ClientOnly>
-      <UiSurface v-show="isOpen" ref="popperNode" p="2">
-        <slot name="content" :close="close" :is-open="isOpen" />
-      </UiSurface>
-    </ClientOnly>
+    <UiDropdownMenu ref="popperNode">
+      <!-- <slot name="menu" /> -->
+      <slot name="menu" />
+    </UiDropdownMenu>
   </div>
 </template>

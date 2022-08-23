@@ -2,6 +2,7 @@
 import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { loginDto, LoginDto } from '@/dtos/auth.dto';
+import { vFocus } from '@/directives/focus';
 
 const { t } = useI18n();
 const { router, routes } = useTypedRouter();
@@ -30,14 +31,14 @@ const submitErrorMessage = useSubmitError(error);
 </script>
 
 <template>
-  <form space-y-5 @submit.prevent="onSubmit">
+  <form ref="formElement" space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="signup-mail"
       v-slot="{ on, bind }"
       name="email"
       :label="t('email.label')"
     >
-      <UiTextInput v-bind="bind" type="email" v-on="on" />
+      <UiTextInput v-focus v-bind="bind" type="email" v-on="on" />
     </UiFormControl>
 
     <UiFormControl

@@ -3,6 +3,7 @@ import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { CreateUserDto, createUserDto } from '~~/dtos/user.dto';
 import { Gender } from '@prisma/client';
+import { vFocus } from '@/directives/focus';
 
 const { t } = useI18n();
 const { router, routes } = useTypedRouter();
@@ -40,14 +41,14 @@ const genders = [
 </script>
 
 <template>
-  <form space-y-5 @submit.prevent="onSubmit">
+  <form ref="formElement" space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="signin-gender"
       v-slot="{ on, bind }"
       name="gender"
       :label="t('gender.label')"
     >
-      <UiRadioGroup v-bind="bind" :values="genders" v-on="on" />
+      <UiRadioGroup v-focus v-bind="bind" :values="genders" v-on="on" />
     </UiFormControl>
 
     <UiFormControl

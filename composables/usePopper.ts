@@ -5,25 +5,25 @@ import offset from '@popperjs/core/lib/modifiers/offset';
 import arrow from '@popperjs/core/lib/modifiers/arrow';
 import { Instance, Placement } from '@popperjs/core';
 import { Maybe, MaybeRef } from '~~/utils/types';
+import { Ref } from 'vue';
 
 const toInt = (x: string | number) => parseInt(`${x}`, 10);
 
 export type UsePopperOptions = {
   triggerNode: Maybe<Element>;
   popperNode: Maybe<HTMLElement>;
-  placement: Placement;
-  locked: boolean;
-  offsetSkid: string | number;
-  offsetDistance: string | number;
-  arrowPadding: string | number;
+  offsetSkid?: string | number;
+  offsetDistance?: string | number;
+  locked?: boolean;
+  placement?: Placement;
+  arrowPadding?: string | number;
 };
 
 export default function usePopper(
-  emit: (name: 'close:popper' | 'open:popper', ...args: any[]) => void,
+  isOpen: Ref<boolean>,
   options: MaybeRef<UsePopperOptions>
 ) {
-  const state = reactive<{ isOpen: boolean; popperInstance: Maybe<Instance> }>({
-    isOpen: false,
+  const state = reactive<{ popperInstance: Maybe<Instance> }>({
     popperInstance: null
   });
 
@@ -40,49 +40,26 @@ export default function usePopper(
   const enablePopperEventListeners = () => setPopperEventListeners(true);
   const disablePopperEventListeners = () => setPopperEventListeners(false);
 
-  const close = () => {
-    if (!state.isOpen) {
-      return;
+  watch([isOpen, () => unref(options).placement], async ([isOpen]) => {
+    if (isOpen) {
+      await initializePopper();
+      enablePopperEventListeners();
+    } else {
+      disablePopperEventListeners();
     }
-
-    state.isOpen = false;
-    emit('close:popper');
-  };
-
-  const open = () => {
-    if (state.isOpen) {
-      return;
-    }
-
-    state.isOpen = true;
-    emit('open:popper');
-  };
-
-  // When isOpen or placement change
-  watch(
-    [() => state.isOpen, () => unref(options).placement],
-    async ([isOpen]) => {
-      if (isOpen) {
-        await initializePopper();
-        enablePopperEventListeners();
-      } else {
-        disablePopperEventListeners();
-      }
-    }
-  );
+  });
 
   const initializePopper = async () => {
     await nextTick();
     const {
-      arrowPadding,
-      locked,
-      offsetDistance,
-      offsetSkid,
-      placement,
+      arrowPadding = 0,
+      locked = false,
+      offsetDistance = 10,
+      offsetSkid = 0,
+      placement = 'bottom',
       popperNode,
       triggerNode
     } = unref(options);
-
     if (!triggerNode || !popperNode) return;
 
     state.popperInstance = createPopper(triggerNode, popperNode, {
@@ -120,8 +97,6 @@ export default function usePopper(
   });
 
   return {
-    ...toRefs(state),
-    open,
-    close
+    ...toRefs(state)
   };
 }

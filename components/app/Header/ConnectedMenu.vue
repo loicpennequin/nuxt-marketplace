@@ -5,11 +5,13 @@ const { logoutMutation } = useAuth();
 const { mutate: logout } = logoutMutation();
 
 const onLogout = () => logout(null);
+const isDropdownOpened = ref(false);
+const { t } = useI18n();
 </script>
 
 <template>
   <div flex gap-3 m-l-auto items-center>
-    <UiDropdown>
+    <UiDropdown v-model="isDropdownOpened">
       <template #toggle="{ on }">
         <button
           aspect-square
@@ -19,6 +21,7 @@ const onLogout = () => logout(null);
           flex
           justify-center
           items-center
+          align-middle
           rounded="1/2"
           v-on="on"
         >
@@ -27,10 +30,18 @@ const onLogout = () => logout(null);
       </template>
 
       <template #content>
-        <button @click="onLogout">Logout</button>
+        <div space-y-3>
+          <div flex gap-3>
+            {{ t('darkMode') }}
+            <DarkModeToggle />
+          </div>
+          <button @click="onLogout">Logout</button>
+        </div>
       </template>
     </UiDropdown>
-
-    <DarkModeToggle />
   </div>
 </template>
+
+<i18n lang="json">
+{ "en": { "darkMode": "Toggle Dark mode" } }
+</i18n>
