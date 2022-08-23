@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import chalk from 'chalk';
 
 declare global {
   // eslint-disable-next-line no-var
@@ -34,7 +35,9 @@ const initPrisma = () => {
     const after = Date.now();
 
     console.log(
-      `[PRISMA] - ${params.model}.${params.action} - ${after - before}ms`
+      chalk.magenta('[PRISMA]'),
+      ' - ',
+      `${params.model}.${params.action} - ${after - before}ms`
     );
     return result;
   });

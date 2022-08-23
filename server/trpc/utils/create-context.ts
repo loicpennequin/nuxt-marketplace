@@ -8,15 +8,22 @@ export type TrpcContext = {
   prisma: typeof prisma;
 };
 
+const normalizeRequestHeaders = (headers: any) => {
+  if (headers instanceof Headers) {
+    // when the function is called directly from a $fetch called server side, the headers are an instanfe of Headers
+    // we need to normalize them to a plain object
+    return Object.fromEntries(headers.entries());
+  }
+
+  return headers;
+};
+
 export const createContext = async (
   event: CompatibilityEvent
 ): Promise<TrpcContext> => {
-  console.log(`[ TRPC ] - ${event.req.url?.split('/').reverse()[0]}`);
-  if (event.req.headers instanceof Headers) {
-    event.req.headers = Object.fromEntries(event.req.headers.entries());
-  }
-
   try {
+    event.req.headers = normalizeRequestHeaders(event.req.headers);
+
     const { authorization } = event.req.headers;
     if (authorization) {
       const jwt = verifyJwt(authorization.replace('Bearer ', ''));

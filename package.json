@@ -61,6 +61,7 @@
     "@vueuse/core": "^9.1.0",
     "@vueuse/nuxt": "^9.1.0",
     "bcrypt": "^5.0.1",
+    "chalk": "^5.0.1",
     "date-fns": "^2.29.0",
     "fs-extra": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
