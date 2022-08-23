@@ -50,8 +50,8 @@ const { routes } = useTypedRouter();
       <UiContainer flex justify-between flex-wrap>
         <div grow="1 sm:0" text-center m-b="8 sm:0">
           Created by
-          <a underline href="https://enprojet.eu/yarilo/" target="_blank">
-            Yarilo
+          <a underline href="https://github.com/loicpennequin" target="_blank">
+            Daria
           </a>
         </div>
 
@@ -81,7 +81,7 @@ const { routes } = useTypedRouter();
             cookies
           </NuxtLink>
 
-          <div grow="1 sm:0">© 2022 Yarilo, All rights reserved.</div>
+          <div grow="1 sm:0">© 2022 Daria, All rights reserved.</div>
         </div>
       </UiContainer>
     </UiSurface>

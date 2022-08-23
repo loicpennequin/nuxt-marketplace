@@ -11,7 +11,8 @@
     "db:start": "pscale org switch second-hand-marketplace && pscale connect marketplace dev --port 3309",
     "db:generate": "prisma generate --schema ./server/prisma/schema.prisma",
     "db:sync": "yarn db:generate && prisma db push --schema ./server/prisma/schema.prisma",
-    "db:ui": "prisma studio --schema ./server/prisma/schema.prisma"
+    "db:ui": "prisma studio --schema ./server/prisma/schema.prisma",
+    "maildev": "maildev"
   },
   "devDependencies": {
     "@intlify/nuxt3": "^0.2.3",
@@ -65,6 +66,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "lodash-es": "^4.17.21",
+    "maildev": "^2.0.5",
     "nodemailer": "^6.7.8",
     "pinia": "^2.0.16",
     "trpc-nuxt": "^0.2.5",

@@ -53,7 +53,7 @@ export const userRouter = createRouter()
 
       await sendMail({
         account,
-        subject: `Yarilo - Account verification`,
+        subject: `Daria - Account verification`,
         body: `<p>Hello ${account.user.username}, please <a target="_blank" href="http://localhost:3000/api/verify-email?input=${account.emailVerifyToken}">verify your account by clicking this link</a>`
       });
 

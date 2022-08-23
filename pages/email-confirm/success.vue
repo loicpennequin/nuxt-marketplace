@@ -18,7 +18,7 @@ const { data: currentUser } = useCurrentUser();
 {
   "en": {
     "title": "Welcome, {user} !",
-    "message": "You email has been verified successfully. You can now use all of Yarilo's services."
+    "message": "You email has been verified successfully. You can now use all of Daria's services."
   }
 }
 </i18n>

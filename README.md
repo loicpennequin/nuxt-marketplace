@@ -1,42 +1,44 @@
-# Nuxt 3 Minimal Starter
+# Marketplace App
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+## Installation
 
-## Setup
+Create  .env file by copying .env-sample and replace the dummy values
 
-Make sure to install the dependencies:
+💡 Note: Pusher environment variables are not needed **for now**
+```bash
+cp .env-sample .env
+```
+Install dependencies
 
 ```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+yarn
+```
+***Planetscale only*** Open a separate terminal and start the database connexion 
+```bash
+yarn db:start
 ```
 
-## Development Server
+Generate your Prisma schema and sync it to your database
+```
+yarn db:sync
+```
 
-Start the development server on http://localhost:3000
+## Local development
+
+***Planetscale only*** Open a separate terminal and start the database connexion 
+```bash
+yarn db:start
+```
+
+Open another terminal and start the maildev server to recieve emails in your local environment
+
+*@TODO: make it optional with environment variable and print temporary email links in console*
 
 ```bash
-npm run dev
+yarn maildev
 ```
 
-## Production
-
-Build the application for production:
-
+Open a third terminal and start the appearance-none
 ```bash
-npm run build
+yarn dev
 ```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.

@@ -8,14 +8,21 @@ export type SendMailOptions = {
 };
 
 export const sendMail = async ({ account, body, subject }: SendMailOptions) => {
-  const testAccount = await nodemailer.createTestAccount();
+  // const testAccount = await nodemailer.createTestAccount();
   const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
+    // host: 'smtp.ethereal.email',
+    // port: 587,
+    // secure: false,
+    // auth: {
+    //   user: testAccount.user,
+    //   pass: testAccount.pass
+    // }
+    host: 'localhost',
+    port: 1025,
     secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass
+    tls: {
+      // do not fail on invalid certs
+      rejectUnauthorized: false
     }
   });
 

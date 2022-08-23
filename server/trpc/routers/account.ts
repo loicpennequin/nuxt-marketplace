@@ -28,7 +28,7 @@ export const accountRouter = createRouter()
 
       await sendMail({
         account,
-        subject: `Yarilo - Password reset`,
+        subject: `Daria - Password reset`,
         body: `<p>Hello ${account.user.username}, please <a target="_blank" href="http://localhost:3000/reset-password?token=${passwordResetToken}">follow this link to reset your password</a>.`
       });
     }

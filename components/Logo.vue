@@ -10,7 +10,7 @@ const { routes } = useTypedRouter();
       src="/logo.svg"
       h-full
       w-full
-      alt="Yarilo logo"
+      alt="Daria logo"
       width="138"
       height="27"
     />
@@ -19,7 +19,7 @@ const { routes } = useTypedRouter();
       src="/logo-light.svg"
       h-full
       w-full
-      alt="Yarilo logo"
+      alt="Daria logo"
       width="138"
       height="27"
     />
