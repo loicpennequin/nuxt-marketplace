@@ -1,29 +1,27 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
-import {
-  sendPasswordResetEmailDto,
-  SendPasswordResetEmailDto
-} from '~~/dtos/account.dto';
+import { resetPasswordDto, ResetPasswordDto } from '~~/dtos/account.dto';
 
 const { t } = useI18n();
-
+const route = useRoute();
 const {
   isLoading,
-  mutate: sendEmail,
+  mutate: resetPassword,
   reset,
   error,
   isSuccess
-} = useTrpcMutation('account.sendPasswordresetMail');
+} = useTrpcMutation('account.resetPassword');
 
-const { handleSubmit } = useForm<SendPasswordResetEmailDto>({
-  validationSchema: toFormValidator(sendPasswordResetEmailDto),
+const { handleSubmit } = useForm<ResetPasswordDto>({
+  validationSchema: toFormValidator(resetPasswordDto),
   initialValues: {
-    email: ''
+    token: route.query.token as string,
+    password: ''
   }
 });
 
-const onSubmit = handleSubmit(values => sendEmail(values));
+const onSubmit = handleSubmit(values => resetPassword(values));
 const submitErrorMessage = useSubmitError(error);
 </script>
 
@@ -33,14 +31,13 @@ const submitErrorMessage = useSubmitError(error);
       <UiSurface>
         <form space-y-5 @submit.prevent="onSubmit">
           <h2 text-2xl font-bold>{{ t('title') }}</h2>
-          <p>{{ t('subtitle') }}</p>
           <UiFormControl
-            id="email"
+            id="new-password"
             v-slot="{ on, bind }"
-            name="email"
-            :label="t('email.label')"
+            name="password"
+            :label="t('password.label')"
           >
-            <UiTextInput v-bind="bind" type="email" v-on="on" />
+            <UiPasswordInput v-bind="bind" v-on="on" />
           </UiFormControl>
 
           <UiButton mt-5 w-full :is-loading="isLoading" @click="reset">
@@ -61,12 +58,11 @@ const submitErrorMessage = useSubmitError(error);
 <i18n lang="json">
 {
   "en": {
-    "title": "Lost your password ?",
-    "subtitle": "Please fill the form below. We will send you an e-mail containing a link to select a new password.",
+    "title": "Password reset",
     "submit": "Send password reset email",
-    "success": "If an account with this e-mail address exists on our platform, an e-mail will be sent shortly.",
-    "email": {
-      "label": "E-mail"
+    "success": "Password changed successfully",
+    "password": {
+      "label": "Please select a new password"
     }
   }
 }

@@ -22,6 +22,7 @@ export type RouteListDecl = {
   login: 'login';
   'lost-Password': 'lost-password';
   register: 'register';
+  'reset-Password': 'reset-password';
 };
 
 export type TypedRouteParams = {
@@ -35,6 +36,7 @@ export type TypedRouteParams = {
   login: never;
   'lost-password': never;
   register: never;
+  'reset-password': never;
 };
 
 type TypedRouteParamsStructure = {

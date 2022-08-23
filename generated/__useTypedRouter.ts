@@ -31,7 +31,8 @@ export const useTypedRouter = (): {
     index: 'index',
     login: 'login',
     'lost-Password': 'lost-password',
-    register: 'register'
+    register: 'register',
+    'reset-Password': 'reset-password'
   };
 
   return {

@@ -42,7 +42,7 @@ const { routes } = useTypedRouter();
       </UiContainer>
     </UiSurface>
 
-    <main bg-light-4 dark:bg-dark-3>
+    <main bg-light-4 dark:bg-dark-3 max-w-screen>
       <slot />
     </main>
 

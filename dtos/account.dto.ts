@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
-export const sendPasswordResetEmailDto = z.string().email();
+export const sendPasswordResetEmailDto = z.object({
+  email: z.string().email()
+});
 export type SendPasswordResetEmailDto = z.infer<
   typeof sendPasswordResetEmailDto
 >;

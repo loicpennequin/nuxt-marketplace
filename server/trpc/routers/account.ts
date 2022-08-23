@@ -12,7 +12,7 @@ export const accountRouter = createRouter()
     input: sendPasswordResetEmailDto,
     async resolve({ ctx, input }) {
       const account = await ctx.prisma.account.findFirst({
-        where: { email: input },
+        where: { email: input.email },
         include: { user: true }
       });
 
