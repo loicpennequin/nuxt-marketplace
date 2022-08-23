@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import UiButtonFull from './full.vue';
-import UiButtonOutlined from './outlined.vue';
+import UiButtonFull from './Full.vue';
+import UiButtonOutlined from './Outlined.vue';
 
 type ButtonVariant = 'full' | 'outlined';
 

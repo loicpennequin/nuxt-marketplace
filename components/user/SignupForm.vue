@@ -4,7 +4,7 @@ import { toFormValidator } from '@vee-validate/zod';
 import { CreateUserDto, createUserDto } from '~~/dtos/user.dto';
 import { Gender } from '@prisma/client';
 
-const { t, te } = useI18n();
+const { t } = useI18n();
 const { router, routes } = useTypedRouter();
 
 const {
@@ -14,7 +14,7 @@ const {
   error
 } = useTrpcMutation('user.create', {
   onSuccess() {
-    router.push({ name: routes.index });
+    router.push({ name: routes['email-Confirm'] });
   }
 });
 

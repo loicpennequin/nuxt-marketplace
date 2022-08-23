@@ -15,8 +15,12 @@ import type { TypedRouteList } from './__routes';
 
 export type RouteListDecl = {
   'cms-Page': 'cms-page';
+  'email-Confirm-Error': 'email-confirm-error';
+  'email-Confirm': 'email-confirm';
+  'email-Confirm-Success': 'email-confirm-success';
   index: 'index';
   login: 'login';
+  'lost-Password': 'lost-password';
   register: 'register';
 };
 
@@ -24,8 +28,12 @@ export type TypedRouteParams = {
   'cms-page': {
     page: string | number;
   };
+  'email-confirm-error': never;
+  'email-confirm': never;
+  'email-confirm-success': never;
   index: never;
   login: never;
+  'lost-password': never;
   register: never;
 };
 

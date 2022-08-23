@@ -3,7 +3,7 @@ import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { loginDto, LoginDto } from '@/dtos/auth.dto';
 
-const { t } = useI18n();
+const { t, te } = useI18n();
 const { router, routes } = useTypedRouter();
 
 const { loginMutation } = useAuth();
@@ -49,7 +49,7 @@ const submitErrorMessage = useSubmitError(error);
       <UiPasswordInput v-bind="bind" v-on="on" />
 
       <div text-right>
-        <UiLink :to="{ name: routes['lost-Password'] }" inline-block m-l-auto>
+        <UiLink :to="{ name: routes.index }" inline-block m-l-auto>
           {{ t('forgotPassword') }}
         </UiLink>
       </div>

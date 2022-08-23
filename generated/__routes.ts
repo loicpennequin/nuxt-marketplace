@@ -6,9 +6,21 @@
 
 export const routerPagesNames = {
   'cms-Page': 'cms-page' as const,
+  'email-Confirm-Error': 'email-confirm-error' as const,
+  'email-Confirm': 'email-confirm' as const,
+  'email-Confirm-Success': 'email-confirm-success' as const,
   index: 'index' as const,
   login: 'login' as const,
+  'lost-Password': 'lost-password' as const,
   register: 'register' as const
 };
 
-export type TypedRouteList = 'cms-page' | 'index' | 'login' | 'register';
+export type TypedRouteList =
+  | 'cms-page'
+  | 'email-confirm-error'
+  | 'email-confirm'
+  | 'email-confirm-success'
+  | 'index'
+  | 'login'
+  | 'lost-password'
+  | 'register';

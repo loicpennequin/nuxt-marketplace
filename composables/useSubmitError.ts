@@ -6,6 +6,7 @@ export const useSubmitError = (error: Ref<any>) => {
 
   return computed(() => {
     if (!error.value) return '';
+
     const { httpStatus } = error.value.data;
     const { message } = error.value.shape;
 

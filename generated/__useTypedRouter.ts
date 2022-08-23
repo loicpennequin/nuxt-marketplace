@@ -25,8 +25,12 @@ export const useTypedRouter = (): {
 
   const routesList = {
     'cms-Page': 'cms-page',
+    'email-Confirm-Error': 'email-confirm-error',
+    'email-Confirm': 'email-confirm',
+    'email-Confirm-Success': 'email-confirm-success',
     index: 'index',
     login: 'login',
+    'lost-Password': 'lost-password',
     register: 'register'
   };
 
