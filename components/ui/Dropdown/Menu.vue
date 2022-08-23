@@ -4,7 +4,7 @@ const api = useDropdown();
 const { menuNode, isOpened } = api;
 
 const setMenuNode = (el: any) => {
-  menuNode.value = el.$el;
+  menuNode.value = el?.$el;
 };
 </script>
 
@@ -13,9 +13,9 @@ const setMenuNode = (el: any) => {
     <UiSurface
       v-show="isOpened"
       :ref="el => setMenuNode(el)"
-      p="x-6 y-3"
+      p="0"
       rounded
-      shadow="sm dark-7/20 dark:light-1/10"
+      border="solid 1 light-8 dark:dark-4 "
     >
       <slot v-bind="api" />
     </UiSurface>

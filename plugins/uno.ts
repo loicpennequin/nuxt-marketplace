@@ -12,14 +12,19 @@ const icons = [
   'check',
   'chevron-right',
   'close',
+  'dots-vertical',
   'download',
-  'eye',
   'eye-slash',
+  'eye',
   'moon',
   'offline',
   'online',
+  'power-off',
+  'radio-empty',
+  'radio-filled',
   'spinner',
-  'sun'
+  'sun',
+  'warning-sign'
 ];
 
 export default defineNuxtPlugin(() => {

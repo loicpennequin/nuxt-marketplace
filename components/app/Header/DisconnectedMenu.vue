@@ -7,7 +7,9 @@ const isDropdownOpened = ref(false);
 
 <template>
   <div flex gap-3 m-l-auto items-center>
-    <UiButton :to="{ name: routes.login }">{{ t('login') }}</UiButton>
+    <UiButton :to="{ name: routes.login }" p="x-3 y-2">
+      {{ t('login') }}
+    </UiButton>
 
     <UiDropdown v-model="isDropdownOpened">
       <template #toggle="{ on }">
@@ -26,12 +28,10 @@ const isDropdownOpened = ref(false);
       </template>
 
       <template #menu>
-        <div space-y-3>
-          <div flex gap-3>
-            {{ t('darkMode') }}
-            <DarkModeToggle />
-          </div>
-        </div>
+        <UiDropdownItem>
+          {{ t('darkMode') }}
+          <DarkModeToggle />
+        </UiDropdownItem>
       </template>
     </UiDropdown>
   </div>

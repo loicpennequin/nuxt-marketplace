@@ -16,7 +16,7 @@ const { t } = useI18n();
         <button
           aspect-square
           p-3
-          h-8
+          h-9
           bg-brand-3
           flex
           justify-center
@@ -29,19 +29,19 @@ const { t } = useI18n();
         </button>
       </template>
 
-      <template #content>
-        <div space-y-3>
-          <div flex gap-3>
-            {{ t('darkMode') }}
-            <DarkModeToggle />
-          </div>
-          <button @click="onLogout">Logout</button>
-        </div>
+      <template #menu>
+        <UiDropdownItem>
+          {{ t('darkMode') }}
+          <DarkModeToggle />
+        </UiDropdownItem>
+        <UiDropdownItem icon="power-off" close-on-click @click="onLogout">
+          {{ t('logout') }}
+        </UiDropdownItem>
       </template>
     </UiDropdown>
   </div>
 </template>
 
 <i18n lang="json">
-{ "en": { "darkMode": "Toggle Dark mode" } }
+{ "en": { "darkMode": "Toggle Dark mode", "logout": "Sign off" } }
 </i18n>
