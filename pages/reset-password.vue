@@ -59,10 +59,18 @@ const submitErrorMessage = useSubmitError(error);
 {
   "en": {
     "title": "Password reset",
-    "submit": "Send password reset email",
-    "success": "Password changed successfully",
+    "submit": "Valider",
+    "success": "Password changed successfully.",
     "password": {
-      "label": "Please select a new password"
+      "label": "Please select a new password."
+    }
+  },
+  "fr": {
+    "title": "Réinitialisation du mot de passe",
+    "submit": "Confirm",
+    "success": "Mot de passe modifié avec succès.",
+    "password": {
+      "label": "Veuillez choisir un nouveau mot de passe"
     }
   }
 }

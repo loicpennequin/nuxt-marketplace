@@ -32,6 +32,11 @@ const isDropdownOpened = ref(false);
           {{ t('darkMode') }}
           <DarkModeToggle />
         </UiDropdownItem>
+        <UiDropdownItem icon="globe">
+          {{ t('selectLanguage') }}
+
+          <AppLocaleSelector />
+        </UiDropdownItem>
       </template>
     </UiDropdown>
   </div>
@@ -42,7 +47,14 @@ const isDropdownOpened = ref(false);
   "en": {
     "login": "Login",
     "settings": "settings",
-    "darkMode": "Toggle Dark mode"
+    "darkMode": "Toggle Dark mode",
+    "selectLanguage": "Select language"
+  },
+  "fr": {
+    "login": "Connexion",
+    "settings": "Paramètres",
+    "darkMode": "Activer le thème sombre",
+    "selectLanguage": "Changer la langue"
   }
 }
 </i18n>

@@ -20,6 +20,10 @@ const { t } = useI18n();
   "en": {
     "title": "Email verification error",
     "message": "An error occured while verifying your email address."
+  },
+  "fr": {
+    "title": "Erreur lors de la vérification de l'adresse",
+    "message": "Votre addresse e-mail n'a pas pu être vérifiée."
   }
 }
 </i18n>

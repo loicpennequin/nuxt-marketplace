@@ -20,7 +20,11 @@ const { data: currentUser } = useCurrentUser();
 {
   "en": {
     "title": "Welcome, {user} !",
-    "message": "You email has been verified successfully. You can now use all of Daria's services."
+    "message": "You account has been verified successfully. You can now use all of Daria's services."
+  },
+  "fr": {
+    "title": "Bienvenue, {user} !",
+    "message": "Votre compte a été validé. Vous pouvez désormais utiliser tous les services Daria."
   }
 }
 </i18n>

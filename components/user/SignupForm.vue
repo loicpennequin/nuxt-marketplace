@@ -89,7 +89,7 @@ const genders = [
 <i18n lang="json">
 {
   "en": {
-    "submit": "Sign up",
+    "submit": "Next",
     "gender": {
       "label": "Gender",
       "male": "Male",
@@ -109,6 +109,29 @@ const genders = [
     "errors": {
       "500": "Sorry, we are not able to create your account at this time. Please try again later.",
       "EMAIL_ALREADY_EXISTS": "An account with this email already exists."
+    }
+  },
+  "fr": {
+    "submit": "Suivant",
+    "gender": {
+      "label": "Genre",
+      "male": "Homme",
+      "female": "Femme",
+      "other": "Autre"
+    },
+    "username": {
+      "label": "Pseudo"
+    },
+    "email": {
+      "label": "Adresse e-mail",
+      "exists": "Cette adresse e-mail est déjà utilisée."
+    },
+    "password": {
+      "label": "Mot de passe"
+    },
+    "errors": {
+      "500": "Désolé, une erreur est survenue lors de la création de votre compte. Veuillez réessayer plus tard.",
+      "EMAIL_ALREADY_EXISTS": "Cette adresse e-mail est déjà utilisée."
     }
   }
 }

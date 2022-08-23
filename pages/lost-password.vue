@@ -68,6 +68,15 @@ const submitErrorMessage = useSubmitError(error);
     "email": {
       "label": "E-mail"
     }
+  },
+  "fr": {
+    "title": "Mot de passe perdu ?",
+    "subtitle": "Veuillez remplir le formulaire ci-dessous. Nous vous enverrons un e-mail contenant un lien permettant de réinitialiser votre mot de passe",
+    "submit": "Confirmer",
+    "success": "Si un compte associé à cet adresse existe, un e-mail sera envoyé dans quelques instants.",
+    "email": {
+      "label": "Adresse e-mail"
+    }
   }
 }
 </i18n>

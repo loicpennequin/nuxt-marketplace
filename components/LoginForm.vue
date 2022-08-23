@@ -90,6 +90,21 @@ const submitErrorMessage = useSubmitError(error);
     "errors": {
       "401": "Your e-mail or password is incorrect."
     }
+  },
+  "fr": {
+    "submit": "Se connecter",
+    "register": "Je n'ai pas de compte",
+    "forgotPassword": "J'ai oublié mon mot de passe",
+
+    "email": {
+      "label": "Adresse e-mail"
+    },
+    "password": {
+      "label": "Mot de passe"
+    },
+    "errors": {
+      "401": "Votre adresse e-mail ou votre password est incorrect."
+    }
   }
 }
 </i18n>

@@ -23,6 +23,7 @@ const onClick = () => {
     tabindex="1"
     divide-x
     divide="black/30 dark:white/30"
+    select-none
     @click="onClick"
   >
     <div w-4 aspect-square :i-ui="props.icon" />

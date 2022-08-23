@@ -6,6 +6,7 @@ const { mutate: logout } = logoutMutation();
 
 const onLogout = () => logout(null);
 const isDropdownOpened = ref(false);
+
 const { t } = useI18n();
 </script>
 
@@ -30,11 +31,21 @@ const { t } = useI18n();
       </template>
 
       <template #menu>
-        <UiDropdownItem>
+        <UiDropdownItem icon="brush">
           {{ t('darkMode') }}
           <DarkModeToggle />
         </UiDropdownItem>
-        <UiDropdownItem icon="power-off" close-on-click @click="onLogout">
+        <UiDropdownItem icon="globe">
+          {{ t('selectLanguage') }}
+
+          <AppLocaleSelector />
+        </UiDropdownItem>
+        <UiDropdownItem
+          icon="power-off"
+          close-on-click
+          cursor-pointer
+          @click="onLogout"
+        >
           {{ t('logout') }}
         </UiDropdownItem>
       </template>
@@ -43,5 +54,16 @@ const { t } = useI18n();
 </template>
 
 <i18n lang="json">
-{ "en": { "darkMode": "Toggle Dark mode", "logout": "Sign off" } }
+{
+  "en": {
+    "darkMode": "Toggle Dark mode",
+    "logout": "Sign off",
+    "selectLanguage": "Select language"
+  },
+  "fr": {
+    "darkMode": "Activer le thème sombre",
+    "logout": "Se déconnecter",
+    "selectLanguage": "Changer la langue"
+  }
+}
 </i18n>

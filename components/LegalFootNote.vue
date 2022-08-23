@@ -43,11 +43,19 @@ const props = defineProps<{ keypath: KeyPath }>();
 <i18n lang="json">
 {
   "en": {
-    "signin": "By signing in, you agree to our {tosLink} ans {policyLink}",
-    "signup": "By signing up, you agree to our {tosLink} ans {policyLink}",
+    "signin": "By signing in, you agree to our {tosLink} and {policyLink}",
+    "signup": "By signing up, you agree to our {tosLink} and {policyLink}",
     "links": {
       "tos": "Terms of service",
       "privacy": "Privacy Policy"
+    }
+  },
+  "fr": {
+    "signin": "En vous connectant, vous acceptez {tosLink} ainsi que {policyLink}",
+    "signup": "En vous connectant, vous acceptez {tosLink} ainsi que {policyLink}",
+    "links": {
+      "tos": "nos Conditions d'utilisation",
+      "privacy": "notre politique de respect de la vie privée"
     }
   }
 }

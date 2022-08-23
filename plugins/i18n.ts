@@ -18,4 +18,10 @@ export default defineNuxtPlugin(({ vueApp }) => {
 
   z.setErrorMap(makeZodI18nMap(i18n.global.t as any));
   vueApp.use(i18n);
+
+  return {
+    provide: {
+      i18n: i18n
+    }
+  };
 });

@@ -98,11 +98,11 @@
   },
 
   "errors": {
-    "500": "An error has occured"
+    "500": "Une erreur est survenue"
   },
 
   "languages": {
-    "fr": "French",
-    "en": "English"
+    "fr": "Français",
+    "en": "Anglais"
   }
 }

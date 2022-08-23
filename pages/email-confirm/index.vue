@@ -19,7 +19,11 @@ const { t } = useI18n();
 {
   "en": {
     "title": "Almost there !",
-    "message": "A confirmation email has been sent. Please click on the link inside it to verify your account and log in to your account."
+    "message": "A confirmation email has been sent. Please click on the link inside it to verify your account and log in to the app."
+  },
+  "fr": {
+    "title": "Vous y êtes presque !",
+    "message": "Un e-mail de confirmation vous a été envoyé. Veuillez cliquer sur le lien qu'il contient pour valider la création de votre compt et vous connecter à l'zpplication."
   }
 }
 </i18n>
