@@ -18,7 +18,6 @@ import {
 } from 'vue-query';
 import type { TRPCClient } from '@trpc/client';
 import type { Ref } from 'vue';
-import { useStorage } from '@vueuse/core';
 import { useNuxtApp } from '#app';
 
 export function useClient(): TRPCClient<AppRouter> {
@@ -26,11 +25,9 @@ export function useClient(): TRPCClient<AppRouter> {
   return $client;
 }
 
+const clientHeaders = ref({});
 export function useClientHeaders(): Ref<Record<string, any>> {
-  if (import.meta.env.SSR) {
-    return useState('ssr-trpc-headers', () => ({}));
-  }
-  return useStorage('trpc-nuxt-header', {});
+  return clientHeaders;
 }
 
 export type TrpcQueryOptions<TPath extends TrpcQueryPath> = UseQueryOptions<
