@@ -16,20 +16,7 @@ const { routes } = useTypedRouter();
   <div v-if="currentUser" flex gap-3 m-l-auto items-center>
     <UiDropdown v-model="isDropdownOpened">
       <template #toggle="{ on }">
-        <button
-          aspect-square
-          p-3
-          h-9
-          bg-brand-3
-          flex
-          justify-center
-          items-center
-          align-middle
-          rounded="1/2"
-          v-on="on"
-        >
-          {{ currentUser?.username.charAt(0) }}
-        </button>
+        <UserAvatar is="button" :user="currentUser" v-on="on" />
       </template>
 
       <template #menu>

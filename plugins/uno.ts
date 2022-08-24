@@ -8,10 +8,12 @@ import presetIcons from '@unocss/preset-icons/browser';
 const icons = [
   'arrows-left',
   'arrows-right',
+  'arrow-right-to-bracket',
   'bars',
   'brush',
   'check',
   'chevron-right',
+  'clock',
   'close',
   'dots-vertical',
   'download',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Daria',
+  title: 'Daria Marketplace',
   charset: 'utf-8',
   meta: [{ name: 'description', content: 'Second hand marketplace' }]
 });

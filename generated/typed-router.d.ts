@@ -25,6 +25,7 @@ export type RouteListDecl = {
   'profile-Slug': 'profile-slug';
   register: 'register';
   'reset-Password': 'reset-password';
+  sell: 'sell';
 };
 
 export type TypedRouteParams = {
@@ -45,6 +46,7 @@ export type TypedRouteParams = {
   };
   register: never;
   'reset-password': never;
+  sell: never;
 };
 
 type TypedRouteParamsStructure = {

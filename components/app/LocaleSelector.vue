@@ -21,7 +21,12 @@ const vModel = computed({
     dark:bg-dark-2
     color-inherit
   >
-    <option v-for="lang in availableLocales" :key="lang" :value="lang">
+    <option
+      v-for="lang in availableLocales"
+      :key="lang"
+      :value="lang"
+      bg="hover:brand-500"
+    >
       {{ t(`languages.${lang}`) }}
     </option>
   </select>

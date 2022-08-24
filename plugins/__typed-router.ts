@@ -18,7 +18,8 @@ export default defineNuxtPlugin(nuxtApp => {
     'lost-Password': 'lost-password',
     'profile-Slug': 'profile-slug',
     register: 'register',
-    'reset-Password': 'reset-password'
+    'reset-Password': 'reset-password',
+    sell: 'sell'
   };
 
   return {

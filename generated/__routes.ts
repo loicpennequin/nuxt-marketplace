@@ -15,7 +15,8 @@ export const routerPagesNames = {
   'lost-Password': 'lost-password' as const,
   'profile-Slug': 'profile-slug' as const,
   register: 'register' as const,
-  'reset-Password': 'reset-password' as const
+  'reset-Password': 'reset-password' as const,
+  sell: 'sell' as const
 };
 
 export type TypedRouteList =
@@ -29,4 +30,5 @@ export type TypedRouteList =
   | 'lost-password'
   | 'profile-slug'
   | 'register'
-  | 'reset-password';
+  | 'reset-password'
+  | 'sell';

@@ -19,6 +19,7 @@ model User {
   id            String    @id @default(cuid())
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+  lastOnlineAt  DateTime?
   firstname     String?
   lastname      String?
   username      String

@@ -2,7 +2,6 @@
 import { throttle } from 'lodash-es';
 
 const { isLoggedIn } = useAuth();
-const { routes } = useTypedRouter();
 
 const isCollapsed = ref(false);
 const COLLAPSE_SCROLL_THRESHOLD = 100;
@@ -28,10 +27,7 @@ if (!import.meta.env.SSR) {
   <transition>
     <UiSurface is="header" v-if="!isCollapsed" p="y-3 x-5" sticky top-0>
       <UiContainer flex>
-        <h1 tracking-2 text-xl>
-          <Logo />
-        </h1>
-
+        <h1><Logo h-full /></h1>
         <AppHeaderConnectedMenu v-if="isLoggedIn" />
         <AppHeaderDisconnectedMenu v-else />
       </UiContainer>

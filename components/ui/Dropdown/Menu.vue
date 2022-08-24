@@ -6,14 +6,9 @@ const { menuNode, isOpened } = api;
 
 <template>
   <ClientOnly>
-    <div ref="menuNode" overflow-hidden>
+    <div v-if="isOpened" ref="menuNode" overflow-hidden>
       <transition appear>
-        <UiSurface
-          v-show="isOpened"
-          p="0"
-          rounded
-          border="solid 1 light-8 dark:dark-4 "
-        >
+        <UiSurface p="0" rounded border="solid 1 light-8 dark:dark-4 ">
           <slot v-bind="api" />
         </UiSurface>
       </transition>

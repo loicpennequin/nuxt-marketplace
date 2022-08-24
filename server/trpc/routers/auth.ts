@@ -31,7 +31,10 @@ export const authRouter = createRouter()
 
       await ctx.prisma.account.update({
         where: { id: account.id },
-        data: { refreshToken: tokens.refreshToken }
+        data: {
+          refreshToken: tokens.refreshToken,
+          user: { update: { lastOnlineAt: new Date() } }
+        }
       });
 
       setCookie(ctx.event, 'refresh_token', tokens.refreshToken, {
@@ -92,7 +95,10 @@ export const authRouter = createRouter()
 
       await ctx.prisma.account.update({
         where: { id: account.id },
-        data: { refreshToken: tokens.refreshToken }
+        data: {
+          refreshToken: tokens.refreshToken,
+          user: { update: { lastOnlineAt: new Date() } }
+        }
       });
 
       return { accessToken: tokens.accessToken };
