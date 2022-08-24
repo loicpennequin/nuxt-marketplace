@@ -30,11 +30,11 @@ const { t } = useI18n();
         <UserAvatar :user="user" h="22" text-2xl />
         <div space-y-2>
           <h2 text-xl font-bold>{{ user.username }}</h2>
-          <p flex items-center gap-2>
+          <p flex items="start sm:center" gap-2>
             <span i-ui-arrow-right-to-bracket h-5 />
             {{ t('joinedAt', { timeago: createdTimeAgo }) }}
           </p>
-          <p flex items-center gap-2>
+          <p flex items="start sm:center" gap-2>
             <span i-ui-clock h-5 />
             {{ t('lastOnline', { timeago: lastOnlineTimeAgo }) }}
           </p>

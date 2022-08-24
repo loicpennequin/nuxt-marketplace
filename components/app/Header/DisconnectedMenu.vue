@@ -6,7 +6,7 @@ const isDropdownOpened = ref(false);
 </script>
 
 <template>
-  <div flex gap-3 m-l-auto items-center>
+  <div flex gap-3 items-center>
     <UiButton :to="{ name: routes.login }" p="x-3 y-2">
       {{ t('login') }}
     </UiButton>

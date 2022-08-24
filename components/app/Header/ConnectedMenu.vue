@@ -13,10 +13,10 @@ const { routes } = useTypedRouter();
 </script>
 
 <template>
-  <div v-if="currentUser" flex gap-3 m-l-auto items-center>
+  <div v-if="currentUser" flex gap-3 items-center>
     <UiDropdown v-model="isDropdownOpened">
       <template #toggle="{ on }">
-        <UserAvatar is="button" :user="currentUser" v-on="on" />
+        <UserAvatar is="button" :user="currentUser" h="10" v-on="on" />
       </template>
 
       <template #menu>

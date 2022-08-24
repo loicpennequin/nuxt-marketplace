@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { throttle } from 'lodash-es';
+import ConnectedMenu from './ConnectedMenu.vue';
+import DisconnectedMenu from './DisconnectedMenu.vue';
 
 const { isLoggedIn } = useAuth();
+const menuComponent = computed(() =>
+  isLoggedIn.value ? ConnectedMenu : DisconnectedMenu
+);
 
 const isCollapsed = ref(false);
 const COLLAPSE_SCROLL_THRESHOLD = 100;
@@ -21,15 +26,24 @@ if (!import.meta.env.SSR) {
     )
   );
 }
+const { t } = useI18n();
+const { routes } = useTypedRouter();
 </script>
 
 <template>
   <transition>
     <UiSurface is="header" v-if="!isCollapsed" p="y-3 x-5" sticky top-0>
-      <UiContainer flex>
+      <UiContainer flex gap-4>
         <h1><Logo h-full /></h1>
-        <AppHeaderConnectedMenu v-if="isLoggedIn" />
-        <AppHeaderDisconnectedMenu v-else />
+        <UiButton
+          :to="{ name: routes.sell }"
+          variant="outlined"
+          m-l-auto
+          p="x-3 y-2"
+        >
+          {{ t('sell') }}
+        </UiButton>
+        <component :is="menuComponent" />
       </UiContainer>
     </UiSurface>
   </transition>
@@ -45,3 +59,7 @@ if (!import.meta.env.SSR) {
   --at-apply: '-translate-y-full';
 }
 </style>
+
+<i18n lang="json">
+{ "en": { "sell": "Sell now" }, "fr": { "sell": "Vendre maintenant" } }
+</i18n>
