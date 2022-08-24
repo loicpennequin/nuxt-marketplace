@@ -72,6 +72,7 @@
     "maildev": "^2.0.5",
     "nodemailer": "^6.7.8",
     "pinia": "^2.0.16",
+    "slugify": "^1.6.5",
     "trpc-nuxt": "^0.2.5",
     "vee-validate": "^4.6.2",
     "vue-i18n": "^9.2.2",

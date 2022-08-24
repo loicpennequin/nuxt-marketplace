@@ -6,6 +6,7 @@ import { computeNextUsernameTag } from '../utils/create-username-tag';
 import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
 import { sendMail } from '../services/mail-service';
+import slugify from 'slugify';
 
 export const userRouter = createRouter()
   .query('me', {
@@ -36,6 +37,7 @@ export const userRouter = createRouter()
         });
       }
 
+      const usernameTag = await computeNextUsernameTag(ctx, dto.username);
       const account = await ctx.prisma.account.create({
         data: {
           passwordHash: bcrypt.hashSync(password, 10),
@@ -44,7 +46,8 @@ export const userRouter = createRouter()
           user: {
             create: {
               ...dto,
-              usernameTag: await computeNextUsernameTag(ctx, dto.username)
+              slug: slugify(`${dto.username}#${usernameTag}`, { lower: true }),
+              usernameTag: usernameTag
             }
           }
         },

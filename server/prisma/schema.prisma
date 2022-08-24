@@ -23,6 +23,7 @@ model User {
   lastname      String?
   username      String
   usernameTag   String
+  slug          String
   bio           String?
   gender        Gender
   account       Account?
