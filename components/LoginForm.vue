@@ -6,6 +6,7 @@ import { vFocus } from '@/directives/focus';
 
 const { t } = useI18n();
 const { router, routes } = useTypedRouter();
+const route = useRoute();
 
 const { loginMutation } = useAuth();
 const {
@@ -15,7 +16,7 @@ const {
   error
 } = loginMutation({
   onSuccess() {
-    router.push({ name: routes.index });
+    router.push((route.query.from as any) ?? { name: routes.index });
   }
 });
 const { handleSubmit } = useForm<LoginDto>({
