@@ -15,6 +15,7 @@ export default defineNuxtPlugin(nuxtApp => {
     index: 'index',
     login: 'login',
     'lost-Password': 'lost-password',
+    'profile-Slug': 'profile-slug',
     register: 'register',
     'reset-Password': 'reset-password'
   };

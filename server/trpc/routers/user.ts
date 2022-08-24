@@ -1,4 +1,8 @@
-import { createUserDto, findUserByIdDto } from '~~/dtos/user.dto';
+import {
+  createUserDto,
+  findUserByIdDto,
+  findUserBySlugDto
+} from '~~/dtos/user.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
@@ -23,6 +27,12 @@ export const userRouter = createRouter()
     input: findUserByIdDto,
     resolve({ ctx, input }) {
       return ctx.prisma.user.findUnique({ where: { id: input } });
+    }
+  })
+  .query('findBySlug', {
+    input: findUserBySlugDto,
+    resolve({ ctx, input }) {
+      return ctx.prisma.user.findFirst({ where: { slug: input } });
     }
   })
   .mutation('create', {

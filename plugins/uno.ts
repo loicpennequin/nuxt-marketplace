@@ -26,6 +26,7 @@ const icons = [
   'radio-filled',
   'spinner',
   'sun',
+  'user',
   'warning-sign'
 ];
 

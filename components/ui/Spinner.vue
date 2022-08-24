@@ -1,3 +1,3 @@
 <template>
-  <div animate-spin h="7" i-ui-spinner w="7" />
+  <div animate-spin i-ui-spinner w="7" h="7" />
 </template>

@@ -17,25 +17,25 @@ const props = defineProps<{ keypath: KeyPath }>();
     tag="p"
   >
     <template #tosLink>
-      <UiLink
+      <AppLink
         :to="{
           name: routes['cms-Page'],
           params: { page: 'terms-of-service' }
         }"
       >
         {{ t('links.tos') }}
-      </UiLink>
+      </AppLink>
     </template>
 
     <template #policyLink>
-      <UiLink
+      <AppLink
         :to="{
           name: routes['cms-Page'],
           params: { page: 'security-policy' }
         }"
       >
         {{ t('links.policy') }}
-      </UiLink>
+      </AppLink>
     </template>
   </i18n-t>
 </template>

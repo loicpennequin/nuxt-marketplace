@@ -5,6 +5,7 @@
  * */
 
 export const routerPagesNames = {
+  '404': '404' as const,
   'cms-Page': 'cms-page' as const,
   'email-Confirm-Error': 'email-confirm-error' as const,
   'email-Confirm': 'email-confirm' as const,
@@ -12,11 +13,13 @@ export const routerPagesNames = {
   index: 'index' as const,
   login: 'login' as const,
   'lost-Password': 'lost-password' as const,
+  'profile-Slug': 'profile-slug' as const,
   register: 'register' as const,
   'reset-Password': 'reset-password' as const
 };
 
 export type TypedRouteList =
+  | '404'
   | 'cms-page'
   | 'email-confirm-error'
   | 'email-confirm'
@@ -24,5 +27,6 @@ export type TypedRouteList =
   | 'index'
   | 'login'
   | 'lost-password'
+  | 'profile-slug'
   | 'register'
   | 'reset-password';

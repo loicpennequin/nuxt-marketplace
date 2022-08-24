@@ -15,3 +15,6 @@ export type CreateUserDto = z.infer<typeof createUserDto>;
 
 export const findUserByIdDto = z.string();
 export type FindUserByIdDto = z.infer<typeof findUserByIdDto>;
+
+export const findUserBySlugDto = z.string();
+export type FindUserBySlugDto = z.infer<typeof findUserBySlugDto>;

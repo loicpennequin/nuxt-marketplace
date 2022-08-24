@@ -50,9 +50,9 @@ const submitErrorMessage = useSubmitError(error);
       <UiPasswordInput v-bind="bind" v-on="on" />
 
       <div text-right>
-        <UiLink :to="{ name: routes['lost-Password'] }" inline-block m-l-auto>
+        <AppLink :to="{ name: routes['lost-Password'] }" inline-block m-l-auto>
           {{ t('forgotPassword') }}
-        </UiLink>
+        </AppLink>
       </div>
     </UiFormControl>
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data: users, error, isLoading } = useTrpcQuery(['user.findAll']);
+const { routes } = useTypedRouter();
 </script>
 
 <template>
@@ -10,7 +11,11 @@ const { data: users, error, isLoading } = useTrpcQuery(['user.findAll']);
       <div v-else-if="users && !users.length">There are no users yet.</div>
       <ul v-else-if="users">
         <li v-for="user in users" :key="user.id">
-          {{ user.username }}#{{ user.usernameTag }} ( slug: {{ user.slug }})
+          <AppLink
+            :to="{ name: routes['profile-Slug'], params: { slug: user.slug } }"
+          >
+            {{ user.username }}#{{ user.usernameTag }}
+          </AppLink>
         </li>
       </ul>
     </UiSurface>

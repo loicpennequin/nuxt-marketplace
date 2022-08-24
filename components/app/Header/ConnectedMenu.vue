@@ -8,10 +8,12 @@ const onLogout = () => logout(null);
 const isDropdownOpened = ref(false);
 
 const { t } = useI18n();
+
+const { routes } = useTypedRouter();
 </script>
 
 <template>
-  <div flex gap-3 m-l-auto items-center>
+  <div v-if="currentUser" flex gap-3 m-l-auto items-center>
     <UiDropdown v-model="isDropdownOpened">
       <template #toggle="{ on }">
         <button
@@ -31,6 +33,19 @@ const { t } = useI18n();
       </template>
 
       <template #menu>
+        <UiDropdownItem icon="user" close-on-click>
+          <AppLink
+            flex-1
+            no-underline
+            color="inherit"
+            :to="{
+              name: routes['profile-Slug'],
+              params: { slug: currentUser?.slug }
+            }"
+          >
+            {{ t('profile') }}
+          </AppLink>
+        </UiDropdownItem>
         <UiDropdownItem icon="brush">
           {{ t('darkMode') }}
           <DarkModeToggle />
@@ -58,12 +73,14 @@ const { t } = useI18n();
   "en": {
     "darkMode": "Toggle Dark mode",
     "logout": "Sign off",
-    "selectLanguage": "Select language"
+    "selectLanguage": "Select language",
+    "profile": "My profile"
   },
   "fr": {
     "darkMode": "Activer le thème sombre",
     "logout": "Se déconnecter",
-    "selectLanguage": "Changer la langue"
+    "selectLanguage": "Changer la langue",
+    "profile": "Mon profil"
   }
 }
 </i18n>

@@ -14,6 +14,7 @@ import type {
 import type { TypedRouteList } from './__routes';
 
 export type RouteListDecl = {
+  '404': '404';
   'cms-Page': 'cms-page';
   'email-Confirm-Error': 'email-confirm-error';
   'email-Confirm': 'email-confirm';
@@ -21,11 +22,15 @@ export type RouteListDecl = {
   index: 'index';
   login: 'login';
   'lost-Password': 'lost-password';
+  'profile-Slug': 'profile-slug';
   register: 'register';
   'reset-Password': 'reset-password';
 };
 
 export type TypedRouteParams = {
+  '404': {
+    catchAll: string | number;
+  };
   'cms-page': {
     page: string | number;
   };
@@ -35,6 +40,9 @@ export type TypedRouteParams = {
   index: never;
   login: never;
   'lost-password': never;
+  'profile-slug': {
+    slug: string | number;
+  };
   register: never;
   'reset-password': never;
 };

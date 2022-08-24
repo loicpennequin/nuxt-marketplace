@@ -9,10 +9,21 @@ const { suspense } = useCurrentUser();
 onServerPrefetch(suspense);
 
 useAuth().getWatchers();
+
+const isPreloading = useRouterPreload();
 </script>
 
 <template>
   <NuxtLayout color-black dark:color-white>
+    <UiSpinner
+      v-if="isPreloading"
+      fixed
+      right="5"
+      top="15"
+      z-30
+      w="10"
+      h="10"
+    />
     <NuxtPage />
   </NuxtLayout>
 </template>

@@ -24,6 +24,7 @@ export const useTypedRouter = (): {
   const { $router } = useNuxtApp();
 
   const routesList = {
+    '404': '404',
     'cms-Page': 'cms-page',
     'email-Confirm-Error': 'email-confirm-error',
     'email-Confirm': 'email-confirm',
@@ -31,6 +32,7 @@ export const useTypedRouter = (): {
     index: 'index',
     login: 'login',
     'lost-Password': 'lost-password',
+    'profile-Slug': 'profile-slug',
     register: 'register',
     'reset-Password': 'reset-password'
   };
