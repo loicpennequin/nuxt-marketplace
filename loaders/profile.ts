@@ -5,6 +5,6 @@ export const profileLoader = createPageLoader({
     key: ['user.findBySlug', route.params.slug as string],
     queryOptions: {},
     ssrPrefetch: true,
-    waitPreloadBeforeNavigation: true
+    waitPreloadBeforeNavigation: false
   })
 });

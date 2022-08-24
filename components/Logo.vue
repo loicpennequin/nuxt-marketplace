@@ -3,7 +3,7 @@ const { routes } = useTypedRouter();
 </script>
 
 <template>
-  <NuxtLink :to="{ name: routes.index }">
+  <NuxtLink :to="{ name: routes.index }" block>
     <img
       class="app-logo"
       src="/logo.svg"

@@ -46,7 +46,7 @@ export const createPageLoader = <T extends TrpcKeyDictionary>(
       const route = useRoute();
 
       const initialRouteName = route.name;
-      const resolvedData: LoaderDependencies<T> = reactive({});
+      const resolvedData = reactive<LoaderDependencies<T>>({});
 
       const entries: [keyof T, ReturnType<typeof useTrpcQuery>][] =
         objectEntries(options).map(([name, queryDef]) => {

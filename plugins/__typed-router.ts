@@ -8,6 +8,7 @@ import { defineNuxtPlugin } from '#app';
 
 export default defineNuxtPlugin(nuxtApp => {
   const routesList = {
+    '404': '404',
     'cms-Page': 'cms-page',
     'email-Confirm-Error': 'email-confirm-error',
     'email-Confirm': 'email-confirm',
