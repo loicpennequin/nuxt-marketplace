@@ -104,5 +104,26 @@
   "languages": {
     "fr": "Français",
     "en": "Anglais"
+  },
+
+  "timeAgo": {
+    "justNow": "il y a un instant",
+    "past": "il y a {n}",
+    "future": "dans {n}",
+    "months": "{n} mois",
+    "lastMonth": "le mois dernier",
+    "nextMonth": "le mois prochain",
+    "years": "{n} an | {n} ans",
+    "lastYear": "l'année dernière",
+    "nextYear": "l'année prochaine",
+    "days": "{n} jour | {n} jours",
+    "lastDay": "hier",
+    "nextDay": "demain",
+    "weeks": "{n} semaine | {n} semaines",
+    "lastWeek": "la semaine dernière",
+    "nextWeek": "la semaine prochaine",
+    "hours": "{n} heure | {n} heures",
+    "minutes": "{n} minute | {n} minutes",
+    "seconds": "{n} seconde | {n} secondes"
   }
 }

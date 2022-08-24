@@ -32,7 +32,7 @@ export const useAuth = () => {
       }
     });
 
-  const getWatchers = () => {
+  const startWatchers = () => {
     const headers = useClientHeaders();
 
     const setHeader = () => {
@@ -74,6 +74,6 @@ export const useAuth = () => {
     loginMutation,
     refreshTokenMutation,
     logoutMutation,
-    getWatchers
+    startWatchers
   };
 };

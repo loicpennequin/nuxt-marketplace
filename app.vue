@@ -8,7 +8,7 @@ useHead({
 const { suspense } = useCurrentUser();
 onServerPrefetch(suspense);
 
-useAuth().getWatchers();
+useAuth().startWatchers();
 
 const isPreloading = useRouterPreload();
 </script>
