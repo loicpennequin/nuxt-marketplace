@@ -25,7 +25,8 @@ export const useDropdownProvider = (isOpened: Ref<boolean>) => {
     isOpened,
     computed(() => ({
       popperNode: unrefElement(menuNode),
-      triggerNode: unref(toggleNode)
+      triggerNode: unref(toggleNode),
+      placement: 'bottom-start'
     }))
   );
 

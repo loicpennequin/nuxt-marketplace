@@ -12,7 +12,6 @@ const { routes } = useTypedRouter();
       alt="Daria logo"
       width="60"
       height="32"
-      loading="lazy"
     />
     <img
       class="app-logo--dark-mode"
@@ -22,7 +21,6 @@ const { routes } = useTypedRouter();
       alt="Daria logo"
       width="60"
       height="32"
-      loading="lazy"
     />
   </NuxtLink>
 </template>

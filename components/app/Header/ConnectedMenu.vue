@@ -38,7 +38,7 @@ const { t } = useI18n();
         <UiDropdownItem icon="globe">
           {{ t('selectLanguage') }}
 
-          <AppLocaleSelector />
+          <AppLocaleSelector m-l-auto flex-1 />
         </UiDropdownItem>
         <UiDropdownItem
           icon="power-off"

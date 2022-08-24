@@ -28,14 +28,14 @@ const isDropdownOpened = ref(false);
       </template>
 
       <template #menu>
-        <UiDropdownItem>
+        <UiDropdownItem icon="brush">
           {{ t('darkMode') }}
           <DarkModeToggle />
         </UiDropdownItem>
         <UiDropdownItem icon="globe">
           {{ t('selectLanguage') }}
 
-          <AppLocaleSelector />
+          <AppLocaleSelector m-l-auto flex-1 />
         </UiDropdownItem>
       </template>
     </UiDropdown>

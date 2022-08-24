@@ -15,19 +15,19 @@ const onClick = () => {
 </script>
 <template>
   <div
+    tabindex="1"
     flex
     items-center
     gap-4
     bg="hover:light-3 dark:hover:dark-2"
     p="3"
-    tabindex="1"
     divide-x
     divide="black/30 dark:white/30"
     select-none
     @click="onClick"
   >
     <div w-4 aspect-square :i-ui="props.icon" />
-    <div p-l-5 flex gap-2>
+    <div p-l-5 flex items-center gap-2 flex-1>
       <slot />
     </div>
   </div>

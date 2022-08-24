@@ -2,22 +2,32 @@
 const api = useDropdown();
 
 const { menuNode, isOpened } = api;
-
-const setMenuNode = (el: any) => {
-  menuNode.value = el?.$el;
-};
 </script>
 
 <template>
   <ClientOnly>
-    <UiSurface
-      v-show="isOpened"
-      :ref="el => setMenuNode(el)"
-      p="0"
-      rounded
-      border="solid 1 light-8 dark:dark-4 "
-    >
-      <slot v-bind="api" />
-    </UiSurface>
+    <div ref="menuNode" overflow-hidden>
+      <transition appear>
+        <UiSurface
+          v-show="isOpened"
+          p="0"
+          rounded
+          border="solid 1 light-8 dark:dark-4 "
+        >
+          <slot v-bind="api" />
+        </UiSurface>
+      </transition>
+    </div>
   </ClientOnly>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  --at-apply: 'transition-all duration-200';
+}
+.v-enter-from,
+.v-leave-to {
+  --at-apply: '-translate-y-5 opacity-0';
+}
+</style>

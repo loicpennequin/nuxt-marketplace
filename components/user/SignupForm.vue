@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { CreateUserDto, createUserDto } from '~~/dtos/user.dto';
-import { Gender } from '@prisma/client';
+import { Gender } from '@/utils/constants/enums';
 import { vFocus } from '@/directives/focus';
 
 const { t } = useI18n();
