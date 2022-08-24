@@ -77,9 +77,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     jwtSecret: '',
     refreshTokenSecret: '',
-    public: {
-      cloudinaryId: ''
-    }
+    cloudinaryId: '',
+    cloudinaryApiKey: '',
+    cloudinaryApiSecret: ''
   },
   vite: {
     plugins: [
