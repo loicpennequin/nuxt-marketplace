@@ -1,5 +1,10 @@
 # Marketplace App
 
+## Prerequisites
+- [NodeJS >= 16.0](https://nodejs.org/en/)
+- [Planetscale CLI](https://planetscale.com/features/cli)
+- [a Planetscale account](https://planetscale.com/)
+- [a Cloudinary account](https://cloudinary.com/)
 ## Installation
 
 Create  .env file by copying .env-sample and replace the dummy values

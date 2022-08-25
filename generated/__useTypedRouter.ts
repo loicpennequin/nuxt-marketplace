@@ -32,6 +32,7 @@ export const useTypedRouter = (): {
     index: 'index',
     login: 'login',
     'lost-Password': 'lost-password',
+    parameters: { profile: 'parameters-profile' },
     'profile-Slug': 'profile-slug',
     register: 'register',
     'reset-Password': 'reset-password',

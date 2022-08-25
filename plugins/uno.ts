@@ -19,6 +19,7 @@ const icons = [
   'download',
   'eye-slash',
   'eye',
+  'file-upload',
   'globe',
   'moon',
   'offline',
@@ -26,6 +27,7 @@ const icons = [
   'power-off',
   'radio-empty',
   'radio-filled',
+  'settings',
   'spinner',
   'sun',
   'user',
@@ -71,9 +73,8 @@ export default defineNuxtPlugin(() => {
             }
           }
         },
-        // @ts-ignore
         presets: [
-          presetWind(presetWind()),
+          presetWind(),
           presetAttributify(),
           presetIcons({
             collections: {

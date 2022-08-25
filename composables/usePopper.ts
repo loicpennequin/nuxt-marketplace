@@ -88,7 +88,6 @@ export default function usePopper(
       ]
     });
 
-    // Update its position
     state.popperInstance.update();
   };
 

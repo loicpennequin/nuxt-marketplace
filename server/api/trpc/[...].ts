@@ -3,5 +3,5 @@ import * as functions from '@/server/trpc';
 
 export default createTRPCHandler({
   ...functions,
-  endpoint: '/trpc'
+  endpoint: '/api/trpc'
 });

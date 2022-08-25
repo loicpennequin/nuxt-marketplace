@@ -21,10 +21,11 @@ const preloadData = () => {
 
 const preloadAssets = () => {
   resolve(props.to).matched.forEach(match => {
-    // @ts-ignore
+    if (!match.components) return;
     Object.values(match.components).forEach(fn => {
+      if (typeof fn !== 'function') return;
       // @ts-ignore
-      typeof fn === 'function' && fn();
+      fn();
     });
   });
 };

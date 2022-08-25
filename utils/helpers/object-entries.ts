@@ -1,6 +1,6 @@
 import { Entries } from '../types';
 
-// type safe OBject.entries
+// type safe Object.entries
 export function objectEntries<T extends object>(t: T): Entries<T>[] {
   return Object.entries(t) as any;
 }

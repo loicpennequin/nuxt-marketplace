@@ -40,10 +40,11 @@ const { routes } = useTypedRouter();
           variant="outlined"
           m-l-auto
           p="x-3 y-2"
+          lt-sm="hidden"
         >
           {{ t('sell') }}
         </UiButton>
-        <component :is="menuComponent" />
+        <component :is="menuComponent" m-l="lt-sm:auto" />
       </UiContainer>
     </UiSurface>
   </transition>

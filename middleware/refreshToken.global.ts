@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async () => {
   try {
     console.log('=======================================');
     const { jwt } = useJwt();
-    const res: any = await $fetch.raw('/trpc/auth.refreshToken', {
+    const res: any = await $fetch.raw('/api/trpc/auth.refreshToken', {
       method: 'POST',
       // @ts-ignore
       headers: useRequestHeaders(['cookie'])

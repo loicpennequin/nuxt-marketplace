@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { useSlots, useAttrs } from 'vue';
 import NuxtLink from '#app/components/nuxt-link';
 
 interface Props {
-  isFullwidth?: boolean;
   leftIcon?: string;
   rightIcon?: string;
   isLoading?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isFullwidth: false,
   leftIcon: '',
   rightIcon: '',
   isLoading: false

@@ -63,7 +63,7 @@ export const useTrpcQuery = <
   });
 
   return useQuery<InferQueryOutput<TPath>, TRPCClientError<AppRouter>>(
-    resolvedOptions as TrpcQueryOptions<TPath> // vue-uery typing states that you cant pass a ref as options, but you actually can
+    resolvedOptions as TrpcQueryOptions<TPath> // vue-uery typing says that you cant pass a ref as options, but you actually can
   );
 };
 

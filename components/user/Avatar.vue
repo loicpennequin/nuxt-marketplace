@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{ user: User; is?: any }>(), {
     aspect-square
     p-3
     h="9"
-    bg-brand-3
+    bg-brand-4
     flex
     justify-center
     items-center

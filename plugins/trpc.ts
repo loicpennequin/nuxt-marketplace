@@ -10,7 +10,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const headers = useRequestHeaders();
 
   const client = trpc.createTRPCClient<AppRouter>({
-    url: `http://localhost:3000/trpc`,
+    url: `http://localhost:3000/api/trpc`,
     headers: () => {
       const otherHeaders = useClientHeaders();
       return {

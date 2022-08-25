@@ -20,23 +20,32 @@ const { routes } = useTypedRouter();
       </template>
 
       <template #menu>
-        <UiDropdownItem icon="user" close-on-click>
-          <AppLink
-            flex-1
-            no-underline
-            color="inherit"
-            :to="{
-              name: routes['profile-Slug'],
-              params: { slug: currentUser?.slug }
-            }"
-          >
-            {{ t('profile') }}
-          </AppLink>
+        <UiDropdownItem
+          icon="user"
+          close-on-click
+          :to="{
+            name: routes['profile-Slug'],
+            params: { slug: currentUser?.slug }
+          }"
+        >
+          {{ t('profile') }}
         </UiDropdownItem>
+
+        <UiDropdownItem
+          icon="settings"
+          close-on-click
+          :to="{
+            name: routes.parameters.profile
+          }"
+        >
+          {{ t('settings') }}
+        </UiDropdownItem>
+
         <UiDropdownItem icon="brush">
           {{ t('darkMode') }}
           <DarkModeToggle />
         </UiDropdownItem>
+
         <UiDropdownItem icon="globe">
           {{ t('selectLanguage') }}
 
@@ -61,13 +70,15 @@ const { routes } = useTypedRouter();
     "darkMode": "Toggle Dark mode",
     "logout": "Sign off",
     "selectLanguage": "Select language",
-    "profile": "My profile"
+    "profile": "My profile",
+    "settings": "Settings"
   },
   "fr": {
     "darkMode": "Activer le thème sombre",
     "logout": "Se déconnecter",
     "selectLanguage": "Changer la langue",
-    "profile": "Mon profil"
+    "profile": "Mon profil",
+    "settings": "Paramètres"
   }
 }
 </i18n>
