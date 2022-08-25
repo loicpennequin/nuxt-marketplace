@@ -32,7 +32,15 @@ const icons = [
   'sun',
   'user',
   'warning-sign'
-];
+] as const;
+
+const iconPromises: Map<typeof icons[number], Promise<any>> = new Map();
+
+const fetchIcon = async (icon: string) => {
+  const response = await fetch(`/icons/${icon}.svg`);
+  const svg = await response.text();
+  return svg.replace('<svg ', '<svg fill="currentColor" ');
+};
 
 export default defineNuxtPlugin(() => {
   if (process.client) {
@@ -40,9 +48,11 @@ export default defineNuxtPlugin(() => {
       icons.map(icon => [
         icon,
         async () => {
-          const response = await fetch(`/icons/${icon}.svg`);
-          const svg = await response.text();
-          return svg.replace('<svg ', '<svg fill="currentColor" ');
+          if (iconPromises.has(icon)) return iconPromises.get(icon);
+          const promise = fetchIcon(icon);
+          iconPromises.set(icon, promise);
+
+          return promise;
         }
       ])
     );
