@@ -1,8 +1,19 @@
+<script setup lang="ts">
+const props = withDefaults(defineProps<{ colorScheme?: string }>(), {
+  colorScheme: 'brand'
+});
+
+const bg = computed(() => `transparent hover:${props.colorScheme}-5`);
+const color = computed(
+  () => `${props.colorScheme}-5 dark:${props.colorScheme}-3`
+);
+</script>
+
 <template>
   <UiButtonBase
-    bg="transparent hover:brand-5"
+    :bg="bg"
     bg-opacity="hover:10"
-    color="brand-5 dark:brand-3"
+    :color="color"
     border="solid 1 currentColor"
   >
     <template #left><slot name="left" /></template>

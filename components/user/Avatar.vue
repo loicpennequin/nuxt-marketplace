@@ -17,7 +17,6 @@ const backgroundImg = computed(
   <component
     :is="props.is"
     aspect-square
-    p-3
     h="9"
     bg-brand-4
     flex
@@ -30,7 +29,11 @@ const backgroundImg = computed(
     :brightness="props.user.avatar && 'hover:110'"
     class="avatar"
   >
-    <span v-if="!props.user.avatar">{{ props.user.username.charAt(0) }}</span>
+    <svg v-if="!props.user.avatar" viewBox="0 0 20 20" h="3/5">
+      <text x="50%" y="15" text-anchor="middle">
+        {{ props.user.username.charAt(0) }}
+      </text>
+    </svg>
   </component>
 </template>
 

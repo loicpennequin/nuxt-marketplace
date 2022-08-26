@@ -7,6 +7,21 @@ import { presetAttributify } from 'unocss';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'url';
 import VueI18nVitePlugin from '@intlify/unplugin-vue-i18n/vite';
+import fs from 'fs-extra';
+import path from 'path';
+
+const iconsDir = fs.readdirSync(path.resolve(process.cwd(), 'assets/icons'));
+const icons = iconsDir
+  .map(fileName => fileName.replace('.svg', ''))
+  .map(icon => `[i-ui~="${icon}"]`);
+const colors = ['brand', 'red', 'green', 'orange', 'dark', 'light'].flatMap(
+  color =>
+    new Array(10)
+      .fill(null)
+      .flatMap((_, i) => [`[bg~="${color}-${i}"]`, `[color~="${color}-${i}"]`])
+);
+
+const safelist = [...colors, ...icons];
 
 export default defineNuxtConfig({
   modules: [
@@ -29,6 +44,7 @@ export default defineNuxtConfig({
   unocss: {
     autoImport: true,
     preflight: true,
+    safelist,
     theme: {
       colors: {
         brand: {

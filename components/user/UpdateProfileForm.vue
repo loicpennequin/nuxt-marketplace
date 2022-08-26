@@ -90,6 +90,7 @@ const avatarVModel = computed<any>({
             variant="outlined"
             block
             w-full
+            color-scheme="red"
             left-icon="trash"
           >
             {{ t('delete') }}
