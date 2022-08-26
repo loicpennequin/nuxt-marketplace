@@ -43,7 +43,7 @@ const { t } = useI18n();
             m-t="5!"
             p-3
             italic
-            border="solid 1 light-4 dark:dark-3"
+            border="solid 1 light-7 dark:dark-4"
             whitespace-pre-wrap
           >
             <div
