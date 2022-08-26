@@ -27,7 +27,7 @@ const isChecked = computed(() => props.value === props.modelValue);
       :name="props.name"
       type="radio"
       :value="value"
-      border="focus:sibling:brand-3"
+      un-focus="sibling:border-brand-3"
     />
     <div
       h-4

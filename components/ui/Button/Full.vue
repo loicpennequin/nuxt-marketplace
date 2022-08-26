@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ colorScheme: string }>(), {
+const props = withDefaults(defineProps<{ colorScheme?: string }>(), {
   colorScheme: 'brand'
 });
 

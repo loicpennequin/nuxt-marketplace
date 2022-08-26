@@ -74,7 +74,7 @@ export default defineNuxtConfig({
       presetWind(),
       presetIcons({
         collections: {
-          ui: FileSystemIconLoader('./public/icons', svg => {
+          ui: FileSystemIconLoader('./assets/icons', svg => {
             return svg.replace('<svg ', '<svg fill="currentColor" ');
           })
         }

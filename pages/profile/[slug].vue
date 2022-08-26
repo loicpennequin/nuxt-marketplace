@@ -38,6 +38,26 @@ const { t } = useI18n();
             <span i-ui-clock h-5 />
             {{ t('lastOnline', { timeago: lastOnlineTimeAgo }) }}
           </p>
+
+          <div
+            m-t="5!"
+            p-3
+            italic
+            border="solid 1 light-4 dark:dark-3"
+            whitespace-pre-wrap
+          >
+            <div
+              w-8
+              h-8
+              i-ui-quote-left
+              float-left
+              bg="currentColor"
+              m-r-2
+              m-l="-5"
+              m-t="-3"
+            />
+            <p>{{ user.bio }}</p>
+          </div>
         </div>
       </UiSurface>
     </template>

@@ -32,7 +32,7 @@ const { routes } = useTypedRouter();
 
 <template>
   <transition>
-    <UiSurface is="header" v-if="!isCollapsed" p="y-3 x-5" sticky top-0>
+    <UiSurface is="header" v-if="!isCollapsed" p="y-3 x-5" sticky top-0 z-1>
       <UiContainer flex gap-4>
         <h1><Logo h-full /></h1>
         <UiButton

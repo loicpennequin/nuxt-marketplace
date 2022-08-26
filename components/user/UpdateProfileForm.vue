@@ -2,7 +2,6 @@
 import { useForm } from 'vee-validate';
 import { toFormValidator } from '@vee-validate/zod';
 import { UpdateProfileDto, updateProfileDto } from '~~/dtos/user.dto';
-import { Gender } from '@/utils/constants/enums';
 import { vFocus } from '@/directives/focus';
 
 const { t } = useI18n();
@@ -20,29 +19,19 @@ const {
   }
 });
 
-const { handleSubmit, values, setFieldValue, errors } =
-  useForm<UpdateProfileDto>({
-    validationSchema: toFormValidator(updateProfileDto),
-    initialValues: {
-      id: currentUser.value?.id as string,
-      username: currentUser.value?.username,
-      firstname: currentUser.value?.firstname,
-      bio: currentUser.value?.bio,
-      gender: currentUser.value?.gender
-    }
-  });
+const { handleSubmit, values, setFieldValue } = useForm<UpdateProfileDto>({
+  validationSchema: toFormValidator(updateProfileDto),
+  initialValues: {
+    id: currentUser.value?.id as string,
+    username: currentUser.value?.username,
+    bio: currentUser.value?.bio
+  }
+});
 
 const onSubmit = handleSubmit(values => updateProfile(values));
 const submitErrorMessage = useSubmitError(error);
 
-const genders = [
-  { label: t('genders.male'), value: Gender.MALE },
-  { label: t('genders.female'), value: Gender.FEMALE },
-  { label: t('genders.other'), value: Gender.OTHER }
-];
-
 const { readAsDataURL } = useFileReader();
-
 const avatarVModel = computed<any>({
   get: () => [],
   set: async (val: Blob[]) => {
@@ -59,13 +48,13 @@ const avatarVModel = computed<any>({
     @submit.prevent="onSubmit"
   >
     <UiFormControl
-      id="signin-avatar"
+      id="update-profile-avatar"
       v-slot="{ bind }"
       name="avatarBase64"
       :label="t('avatar.label')"
     >
       <div grid grid-cols-2 items-center justify-items-center>
-        <div h-30>
+        <div h-30 justify-self-start>
           <img
             v-if="values.avatarBase64"
             :src="values.avatarBase64"
@@ -73,8 +62,11 @@ const avatarVModel = computed<any>({
             h-full
             aspect-square
             rounded="1/2"
-            contrast="hover:120"
-            brightness="hover:110"
+          />
+          <UserAvatar
+            v-else-if="values.avatarBase64 === null"
+            :user="{ ...currentUser, avatar: null }"
+            h="full"
           />
           <UserAvatar v-else :user="currentUser" h="full" />
         </div>
@@ -82,6 +74,7 @@ const avatarVModel = computed<any>({
           <UiFileInput
             v-bind="bind"
             v-model="avatarVModel"
+            v-focus
             block
             :label="t('avatar.button')"
           />
@@ -92,6 +85,7 @@ const avatarVModel = computed<any>({
             w-full
             color-scheme="red"
             left-icon="trash"
+            @click="setFieldValue('avatarBase64', null)"
           >
             {{ t('delete') }}
           </UiButton>
@@ -100,16 +94,7 @@ const avatarVModel = computed<any>({
     </UiFormControl>
 
     <UiFormControl
-      id="signin-gender"
-      v-slot="{ on, bind }"
-      name="gender"
-      :label="t('gender.label')"
-    >
-      <UiRadioGroup v-focus v-bind="bind" :values="genders" v-on="on" />
-    </UiFormControl>
-
-    <UiFormControl
-      id="signin-username"
+      id="update-profile-username"
       v-slot="{ on, bind }"
       name="username"
       :label="t('username.label')"
@@ -118,30 +103,12 @@ const avatarVModel = computed<any>({
     </UiFormControl>
 
     <UiFormControl
-      id="signin-firstname"
-      v-slot="{ on, bind }"
-      name="firstname"
-      :label="t('firstname.label')"
-    >
-      <UiTextInput v-bind="bind" v-on="on" />
-    </UiFormControl>
-
-    <UiFormControl
-      id="signin-lastname"
-      v-slot="{ on, bind }"
-      name="lastname"
-      :label="t('lastname.label')"
-    >
-      <UiTextInput v-bind="bind" v-on="on" />
-    </UiFormControl>
-
-    <UiFormControl
-      id="signin-bio"
+      id="update-profile-bio"
       v-slot="{ on, bind }"
       name="bio"
       :label="t('bio.label')"
     >
-      <UiTextInput v-bind="bind" v-on="on" />
+      <UiTextArea v-bind="bind" v-on="on" />
     </UiFormControl>
 
     <UiButton mt-5 w-full :is-loading="isLoading" @click="reset">

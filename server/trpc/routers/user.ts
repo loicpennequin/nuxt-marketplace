@@ -112,7 +112,7 @@ export const userRouter = createRouter()
         data: {
           ...dto,
           slug: slugify(`${dto.username}#${usernameTag}`, { lower: true }),
-          avatarId: avatar?.id,
+          avatarId: avatar?.id ?? avatarBase64,
           usernameTag
         }
       });

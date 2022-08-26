@@ -25,8 +25,6 @@ const backgroundImg = computed(
     align-middle
     rounded="1/2"
     no-underline
-    :contrast="props.user.avatar && 'hover:120'"
-    :brightness="props.user.avatar && 'hover:110'"
     class="avatar"
   >
     <svg v-if="!props.user.avatar" viewBox="0 0 20 20" h="3/5">

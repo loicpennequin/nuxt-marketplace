@@ -21,11 +21,8 @@ export const updateProfileDto = z.object({
     .min(USERNAME_MIN_LENGTH)
     .max(USERNAME_MAX_LENGTH)
     .optional(),
-  gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
-  firstname: z.string().trim().optional().nullish(),
-  lastname: z.string().trim().optional().nullish(),
   bio: z.string().trim().optional().nullish(),
-  avatarBase64: z.string().optional()
+  avatarBase64: z.string().optional().nullish()
 });
 export type UpdateProfileDto = z.infer<typeof updateProfileDto>;
 
