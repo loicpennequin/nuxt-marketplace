@@ -34,9 +34,9 @@ const onSubmit = handleSubmit(values => signUp(values));
 const submitErrorMessage = useSubmitError(error);
 
 const genders = [
-  { label: t('gender.male'), value: Gender.MALE },
-  { label: t('gender.female'), value: Gender.FEMALE },
-  { label: t('gender.other'), value: Gender.OTHER }
+  { label: t('genders.male'), value: Gender.MALE },
+  { label: t('genders.female'), value: Gender.FEMALE },
+  { label: t('genders.other'), value: Gender.OTHER }
 ];
 </script>
 
@@ -91,10 +91,7 @@ const genders = [
   "en": {
     "submit": "Next",
     "gender": {
-      "label": "Gender",
-      "male": "Male",
-      "female": "Female",
-      "other": "Other"
+      "label": "Gender"
     },
     "username": {
       "label": "Username"
@@ -114,10 +111,7 @@ const genders = [
   "fr": {
     "submit": "Suivant",
     "gender": {
-      "label": "Genre",
-      "male": "Homme",
-      "female": "Femme",
-      "other": "Autre"
+      "label": "Genre"
     },
     "username": {
       "label": "Pseudo"

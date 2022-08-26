@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import type { User } from '@prisma/client';
+import type { User, Media } from '@prisma/client';
+import { Maybe } from '~~/utils/types';
 
-const props = withDefaults(defineProps<{ user: User; is?: any }>(), {
+type UserWithAvatar = User & { avatar?: Maybe<Media> };
+
+const props = withDefaults(defineProps<{ user: UserWithAvatar; is?: any }>(), {
   is: 'div'
 });
+
+const backgroundImg = computed(
+  () => props.user.avatar?.url && `url('${props.user.avatar?.url}')`
+);
 </script>
 
 <template>
@@ -18,7 +25,18 @@ const props = withDefaults(defineProps<{ user: User; is?: any }>(), {
     items-center
     align-middle
     rounded="1/2"
+    no-underline
+    :contrast="props.user.avatar && 'hover:120'"
+    :brightness="props.user.avatar && 'hover:110'"
+    class="avatar"
   >
-    {{ props.user.username.charAt(0) }}
+    <span v-if="!props.user.avatar">{{ props.user.username.charAt(0) }}</span>
   </component>
 </template>
+
+<style scoped>
+.avatar {
+  background-image: v-bind(backgroundImg);
+  background-size: cover;
+}
+</style>

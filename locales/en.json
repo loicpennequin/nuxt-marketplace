@@ -1,4 +1,44 @@
 {
+  "errors": {
+    "500": "An error has occured"
+  },
+
+  "languages": {
+    "fr": "French",
+    "en": "English"
+  },
+
+  "timeAgo": {
+    "justNow": "just now",
+    "past": "{n} ago",
+    "future": "in {n}",
+    "months": "{n} month | {n} months",
+    "lastMonth": "last month",
+    "nextMonth": "next month",
+    "years": "{n} year | {n} years",
+    "lastYear": "last year",
+    "nextYear": "next year",
+    "days": "{n} day | {n} days",
+    "lastDay": "yesterday",
+    "nextDay": "tomorrow",
+    "weeks": "{n} week | {n} weeks",
+    "lastWeek": "last week",
+    "nextWeek": "next week",
+    "hours": "{n} hour | {n} hours",
+    "minutes": "{n} minute | {n} minutes",
+    "seconds": "{n} second | {n} seconds"
+  },
+
+  "genders": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "delete": "Delete",
+
   "zod:errors": {
     "invalid_type": "Expected {expected}, received {received}",
     "invalid_type_received_undefined": "Required",
@@ -95,35 +135,5 @@
     "never": "never",
     "map": "map",
     "set": "set"
-  },
-
-  "errors": {
-    "500": "An error has occured"
-  },
-
-  "languages": {
-    "fr": "French",
-    "en": "English"
-  },
-
-  "timeAgo": {
-    "justNow": "just now",
-    "past": "{n} ago",
-    "future": "in {n}",
-    "months": "{n} month | {n} months",
-    "lastMonth": "last month",
-    "nextMonth": "next month",
-    "years": "{n} year | {n} years",
-    "lastYear": "last year",
-    "nextYear": "next year",
-    "days": "{n} day | {n} days",
-    "lastDay": "yesterday",
-    "nextDay": "tomorrow",
-    "weeks": "{n} week | {n} weeks",
-    "lastWeek": "last week",
-    "nextWeek": "next week",
-    "hours": "{n} hour | {n} hours",
-    "minutes": "{n} minute | {n} minutes",
-    "seconds": "{n} second | {n} seconds"
   }
 }

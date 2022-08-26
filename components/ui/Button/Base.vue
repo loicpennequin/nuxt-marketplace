@@ -30,9 +30,10 @@ const is = computed(() => (attrs.to ? NuxtLink : 'button'));
     flex
     items-center
     justify-center
-    font="bold"
+    font="semibold"
     rounded
     outline="focus:none"
+    border="solid 1 transparent"
     ring="transparent focus-visible:brand-2 2"
     :disabled="isLoading || $attrs.disabled"
   >

@@ -1,7 +1,8 @@
 import {
   createUserDto,
   findUserByIdDto,
-  findUserBySlugDto
+  findUserBySlugDto,
+  updateProfileDto
 } from '~~/dtos/user.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
@@ -11,16 +12,23 @@ import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
 import { sendMail } from '../services/mail-service';
 import slugify from 'slugify';
+import { uploadImage } from '../services/file-upload';
 
 export const userRouter = createRouter()
   .query('me', {
     resolve({ ctx }) {
-      return ctx.event.context.user as User;
+      return ctx.prisma.user.findUnique({
+        where: { id: ctx.event.context.user.id },
+        include: { avatar: true }
+      });
     }
   })
   .query('findAll', {
     resolve({ ctx }) {
-      return ctx.prisma.user.findMany();
+      return ctx.prisma.user.findMany({
+        where: { account: { emailVerified: true } },
+        include: { avatar: true }
+      });
     }
   })
   .query('findById', {
@@ -32,13 +40,16 @@ export const userRouter = createRouter()
   .query('findBySlug', {
     input: findUserBySlugDto,
     resolve({ ctx, input }) {
-      return ctx.prisma.user.findFirst({ where: { slug: input } });
+      return ctx.prisma.user.findFirst({
+        where: { slug: input },
+        include: { avatar: true }
+      });
     }
   })
   .mutation('create', {
     input: createUserDto,
     async resolve({ ctx, input: { password, email, ...dto } }) {
-      const exists = await prisma.account.count({ where: { email: email } });
+      const exists = await prisma.account.count({ where: { email } });
 
       if (exists) {
         throw new TRPCError({
@@ -71,5 +82,39 @@ export const userRouter = createRouter()
       });
 
       return account.user;
+    }
+  })
+  .mutation('updateProfile', {
+    input: updateProfileDto,
+    async resolve({ ctx, input: { id, avatarBase64, ...dto } }) {
+      const user = await prisma.user.findUnique({ where: { id } });
+
+      if (!user) {
+        throw new TRPCError({
+          code: 'NOT_FOUND'
+        });
+      }
+
+      const [avatar, usernameTag] = await Promise.all([
+        avatarBase64
+          ? prisma.media.create({
+              data: {
+                userId: user.id,
+                url: (await uploadImage(avatarBase64)).url
+              }
+            })
+          : undefined,
+        dto.username ? computeNextUsernameTag(ctx, dto.username) : user.username
+      ]);
+
+      return ctx.prisma.user.update({
+        where: { id },
+        data: {
+          ...dto,
+          slug: slugify(`${dto.username}#${usernameTag}`, { lower: true }),
+          avatarId: avatar?.id,
+          usernameTag
+        }
+      });
     }
   });

@@ -30,6 +30,7 @@ const icons = [
   'settings',
   'spinner',
   'sun',
+  'trash',
   'user',
   'warning-sign'
 ] as const;

@@ -12,9 +12,8 @@ definePageMeta({
       <div>Delivery</div>
       <div>Payment</div>
     </UiSurface>
-    <UiSurface>
-      <NuxtPage />
-    </UiSurface>
+
+    <NuxtPage />
   </UiContainer>
 </template>
 

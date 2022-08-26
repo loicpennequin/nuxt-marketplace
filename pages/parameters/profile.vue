@@ -1,3 +1,7 @@
 <template>
-  <div>Edit profile page</div>
+  <UiContainer max-w="md">
+    <UiSurface p="10">
+      <UserUpdateProfileForm />
+    </UiSurface>
+  </UiContainer>
 </template>

@@ -1,9 +1,9 @@
 import { CompatibilityEvent, callHandler } from 'h3';
-import { uploadImage } from '../trpc/services/file-upload';
+import { uploadImageMiddleware } from '../trpc/services/file-upload';
 
 type RequestWithFile = CompatibilityEvent['req'] & { file: any };
 export default async (event: CompatibilityEvent) => {
-  const handler = uploadImage()();
+  const handler = uploadImageMiddleware();
 
   // @ts-ignore
   await callHandler(handler, event.req, event.res);

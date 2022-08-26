@@ -18,7 +18,7 @@ enum Gender {
 model User {
   id            String    @id @default(cuid())
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime? @updatedAt
   lastOnlineAt  DateTime?
   firstname     String?
   lastname      String?
@@ -31,19 +31,23 @@ model User {
   products      Product[]
   cartsAsSeller Cart[]    @relation(name: "seller")
   cartsAsBuyer  Cart[]    @relation(name: "buyer")
+  avatarId      String?   @unique
+  avatar        Media?    @relation(fields: [avatarId], references: [id])
 }
 
 model Account {
-  id                    String  @id @default(cuid())
-  email                 String  @unique
+  id                    String    @id @default(cuid())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime? @updatedAt
+  email                 String    @unique
   emailVerifyToken      String?
-  emailVerified         Boolean @default(false)
+  emailVerified         Boolean   @default(false)
   passwordHash          String
   passwordResetToken    String?
-  refreshToken          String? @db.VarChar(200)
+  refreshToken          String?   @db.VarChar(200)
   refreshTokenExpiresIn Int?
-  userId                String  @unique
-  user                  User    @relation(fields: [userId], references: [id])
+  userId                String    @unique
+  user                  User      @relation(fields: [userId], references: [id])
 
   @@index(fields: [refreshToken])
 }
@@ -63,4 +67,11 @@ model Cart {
   sellerId String
   seller   User   @relation(name: "seller", fields: [sellerId], references: [id])
   buyer    User   @relation(name: "buyer", fields: [buyerId], references: [id])
+}
+
+model Media {
+  id     String @id @default(cuid())
+  url    String
+  User   User?
+  userId String
 }

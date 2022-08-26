@@ -6,12 +6,28 @@ import {
 } from '~~/utils/constants/user.contants';
 
 export const createUserDto = z.object({
-  username: z.string().min(USERNAME_MIN_LENGTH).max(USERNAME_MAX_LENGTH).trim(),
+  username: z.string().trim().min(USERNAME_MIN_LENGTH).max(USERNAME_MAX_LENGTH),
   password: z.string().min(PASSWORD_MIN_LENGTH),
   email: z.string().email().trim(),
   gender: z.enum(['MALE', 'FEMALE', 'OTHER'])
 });
 export type CreateUserDto = z.infer<typeof createUserDto>;
+
+export const updateProfileDto = z.object({
+  id: z.string(),
+  username: z
+    .string()
+    .trim()
+    .min(USERNAME_MIN_LENGTH)
+    .max(USERNAME_MAX_LENGTH)
+    .optional(),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
+  firstname: z.string().trim().optional().nullish(),
+  lastname: z.string().trim().optional().nullish(),
+  bio: z.string().trim().optional().nullish(),
+  avatarBase64: z.string().optional()
+});
+export type UpdateProfileDto = z.infer<typeof updateProfileDto>;
 
 export const findUserByIdDto = z.string();
 export type FindUserByIdDto = z.infer<typeof findUserByIdDto>;

@@ -29,7 +29,6 @@ const initPrisma = () => {
   });
 
   client.$use(async (params, next) => {
-    // console.log(`[PRISMA] - ${params.model}.${params.action} - START`);
     const before = Date.now();
     const result = await next(params);
     const after = Date.now();

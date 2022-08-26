@@ -8,6 +8,7 @@ const props = defineProps<{
   disabled?: boolean;
   multiple?: boolean;
   accept?: string;
+  label?: string;
 }>();
 
 const emit = defineEmits<{
@@ -37,26 +38,26 @@ const onInputChange = (e: Event) => {
 };
 
 const { t } = useI18n();
-const buttonComponentRef = ref<any>();
-const buttonRef = computed(() => unrefElement(buttonComponentRef));
-const { isOverDropZone } = useDropZone(buttonRef, onDrop);
+const dropZoneRef = ref<HTMLElement>();
+const { isOverDropZone } = useDropZone(dropZoneRef, onDrop);
 </script>
 
 <template>
-  <div>
-    <UiButton
-      v-bind="isOverDropZone && { bg: 'brand-6' }"
-      :id="props.id"
-      ref="buttonComponentRef"
-      left-icon="file-upload"
-      type="button"
-      :disabled="props.disabled"
-      :is-loading="props.isLoading"
-      @click="openFilePicker"
-      @keyup.enter="openFilePicker"
-    >
-      <slot>{{ t('label') }}</slot>
-    </UiButton>
+  <div ref="dropZoneRef">
+    <slot :open-file-picker="openFilePicker">
+      <UiButton
+        v-bind="isOverDropZone && { bg: 'brand-6' }"
+        :id="props.id"
+        left-icon="file-upload"
+        type="button"
+        :disabled="props.disabled"
+        :is-loading="props.isLoading"
+        @click="openFilePicker"
+        @keyup.enter="openFilePicker"
+      >
+        {{ props.label ?? t('label') }}
+      </UiButton>
+    </slot>
     <input
       :id="props.id"
       ref="inputRef"

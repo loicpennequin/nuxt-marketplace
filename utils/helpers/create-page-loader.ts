@@ -2,6 +2,7 @@ import { QueryClient, UseQueryOptions } from 'vue-query';
 import { RouteLocationNormalized } from 'vue-router';
 import { PathAndInput, TrpcQueryPath } from '@/utils/types';
 import { objectEntries } from './object-entries';
+import { ComputedRef } from 'vue';
 
 export type TrpcKeyDictionary = Record<string, TrpcQueryPath>;
 
@@ -54,7 +55,7 @@ export const createPageLoader = <T extends TrpcKeyDictionary>(
             () => queryDef(route, resolvedData).key
           );
 
-          const resolvedQueryOptions = computed<any>(() => {
+          const resolvedQueryOptions: ComputedRef<any> = computed<any>(() => {
             const { queryOptions = {} } = queryDef(route, resolvedData);
 
             return {
@@ -62,7 +63,6 @@ export const createPageLoader = <T extends TrpcKeyDictionary>(
               // options can be recomputed when leaving the page, giving wrong params to the query
               enabled: route.name === initialRouteName && queryOptions.enabled,
               onSuccess(data: any) {
-                //@ts-ignore
                 resolvedData[name as keyof T] = data;
                 return (queryOptions as any).onSuccess?.(data);
               }
@@ -70,8 +70,7 @@ export const createPageLoader = <T extends TrpcKeyDictionary>(
           });
 
           const query = useTrpcQuery(pathAndInput, resolvedQueryOptions as any);
-          //@ts-ignore
-          resolvedData[name as keyof T] = query.data.value;
+          resolvedData[name as keyof T] = query.data.value as any;
 
           const getDependentSSRPromise = () => {
             return new Promise<void>(resolve => {
@@ -104,8 +103,7 @@ export const createPageLoader = <T extends TrpcKeyDictionary>(
           watch(
             query.data,
             newData => {
-              //@ts-ignore
-              resolvedData[name as keyof T] = newData;
+              resolvedData[name as keyof T] = newData as any;
             },
             { immediate: true }
           );
