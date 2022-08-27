@@ -3,7 +3,8 @@ import { createRouter } from '../utils/create-router';
 import { sendMail } from '../services/mail-service';
 import {
   resetPasswordDto,
-  sendPasswordResetEmailDto
+  sendPasswordResetEmailDto,
+  updateAccountDto
 } from '~~/dtos/account.dto';
 import bcrypt from 'bcrypt';
 
@@ -50,5 +51,27 @@ export const accountRouter = createRouter()
       });
 
       return true;
+    }
+  })
+  .mutation('updateAccount', {
+    input: updateAccountDto,
+    resolve({ ctx, input }) {
+      return ctx.prisma.user.update({
+        where: { id: input.userId },
+        data: {
+          gender: input.gender,
+          firstname: input.firstname,
+          lastname: input.lastname,
+          account: {
+            update: {
+              passwordHash: input.password
+                ? bcrypt.hashSync(input.password, 10)
+                : undefined,
+              phoneNumber: input.phoneNumber,
+              phoneCountryCode: input.phoneCountryCode
+            }
+          }
+        }
+      });
     }
   });

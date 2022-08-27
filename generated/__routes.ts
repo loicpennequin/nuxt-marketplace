@@ -13,7 +13,10 @@ export const routerPagesNames = {
   index: 'index' as const,
   login: 'login' as const,
   'lost-Password': 'lost-password' as const,
-  parameters: { profile: 'parameters-profile' as const },
+  parameters: {
+    account: 'parameters-account' as const,
+    profile: 'parameters-profile' as const
+  },
   'profile-Slug': 'profile-slug' as const,
   register: 'register' as const,
   'reset-Password': 'reset-password' as const,
@@ -29,6 +32,7 @@ export type TypedRouteList =
   | 'index'
   | 'login'
   | 'lost-password'
+  | 'parameters-account'
   | 'parameters-profile'
   | 'profile-slug'
   | 'register'

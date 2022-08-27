@@ -70,7 +70,7 @@ const avatarVModel = computed<any>({
           />
           <UserAvatar v-else :user="currentUser" h="full" />
         </div>
-        <div space-y-2>
+        <div space-y-4>
           <UiFileInput
             v-bind="bind"
             v-model="avatarVModel"
@@ -126,17 +126,8 @@ const avatarVModel = computed<any>({
       "label": "Profile picture",
       "button": "Select a new photo"
     },
-    "gender": {
-      "label": "Gender"
-    },
     "username": {
       "label": "Username"
-    },
-    "firstname": {
-      "label": "First Name"
-    },
-    "lastname": {
-      "label": "Last Name"
     },
     "bio": {
       "label": "Bio"
@@ -150,17 +141,8 @@ const avatarVModel = computed<any>({
       "label": "Photo de profil",
       "button": "Changer de photo"
     },
-    "gender": {
-      "label": "Genre"
-    },
     "username": {
       "label": "Pseudo"
-    },
-    "firstname": {
-      "label": "Prénom"
-    },
-    "lastname": {
-      "label": "Nom"
     },
     "bio": {
       "label": "Description"

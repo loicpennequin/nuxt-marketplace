@@ -2458,6 +2458,11 @@ cors@^2.8.5, cors@~2.8.5:
     object-assign "^4"
     vary "^1"
 
+country-telephone-data@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/country-telephone-data/-/country-telephone-data-0.6.3.tgz#02828e76ce8c32af8dd60b8e478e5b3deaad3542"
+  integrity sha512-3tQLA0vec+NDVlcaHhXGqILq/oQRsv4fRi4EedCfJqUuJUjQGdcSPM8r2IJIT2kZ5yWbiOCkXMgy7YTo8FNS2w==
+
 crc-32@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/crc-32/-/crc-32-1.2.2.tgz#3cad35a934b8bf71f25ca524b6da51fb7eace2ff"

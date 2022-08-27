@@ -44,6 +44,8 @@ model Account {
   emailVerified         Boolean   @default(false)
   passwordHash          String
   passwordResetToken    String?
+  phoneNumber           String?
+  phoneCountryCode      String?
   refreshToken          String?   @db.VarChar(200)
   refreshTokenExpiresIn Int?
   userId                String    @unique

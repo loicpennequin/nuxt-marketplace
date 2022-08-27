@@ -6,7 +6,6 @@ import {
 } from '~~/dtos/user.dto';
 import { createRouter } from '../utils/create-router';
 import bcrypt from 'bcrypt';
-import { User } from '@prisma/client';
 import { computeNextUsernameTag } from '../utils/create-username-tag';
 import { TRPCError } from '@trpc/server';
 import crypto from 'crypto';
