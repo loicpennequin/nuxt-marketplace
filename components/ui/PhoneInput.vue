@@ -20,10 +20,10 @@ const emit = defineEmits<{
 const { number: numberVModel, code: codeVModel } = useVModels(props, emit);
 
 const FRENCH_DIAL_CODE = '33';
+
 const defaultCountry = phoneData.allCountries.find(
   country => country.dialCode === (props.code ?? FRENCH_DIAL_CODE)
 ) as Country;
-
 const selectedCountry = ref<Country>(defaultCountry);
 const countryVModel = computed({
   get: () => selectedCountry.value,
@@ -35,6 +35,7 @@ const countryVModel = computed({
 
 const onKeypress = (e: KeyboardEvent) => {
   if (!/^[0-9]+$/.test(e.key)) e.preventDefault();
+  if (!props.code) codeVModel.value = FRENCH_DIAL_CODE;
 };
 
 const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);

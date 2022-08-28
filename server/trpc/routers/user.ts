@@ -18,7 +18,7 @@ export const userRouter = createRouter()
     resolve({ ctx }) {
       return ctx.prisma.user.findUnique({
         where: { id: ctx.event.context.user.id },
-        include: { avatar: true }
+        include: { avatar: true, account: true }
       });
     }
   })

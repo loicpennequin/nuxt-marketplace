@@ -28,7 +28,7 @@ const slots = useSlots();
     flex
     items-center
     gap="0"
-    bg="light-2 dark:dark-3"
+    :bg="props.disabled ? 'light-6 dark:dark-2' : 'light-2 dark:dark-3'"
     border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
   >
     <div v-if="slots.left || props.leftIcon" m-l-2 self-stretch>
@@ -45,6 +45,7 @@ const slots = useSlots();
       bg-inherit
       color-inherit
       p="x-3 y-2"
+      :disabled="props.disabled"
       outline="focus:none"
     />
 

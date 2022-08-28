@@ -104,7 +104,7 @@ const submitErrorMessage = useSubmitError(error);
       "label": "Mot de passe"
     },
     "errors": {
-      "401": "Votre adresse e-mail ou votre password est incorrect."
+      "401": "Votre adresse e-mail ou votre mot de passe est incorrect."
     }
   }
 }

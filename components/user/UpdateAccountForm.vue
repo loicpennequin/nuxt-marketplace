@@ -46,6 +46,19 @@ const phoneCountryCode = useFieldModel('phoneCountryCode');
 <template>
   <form v-if="currentUser" space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
+      id="update-account-email"
+      name="email"
+      :label="t('firstname.label')"
+    >
+      <UiTextInput
+        id="update-account-email"
+        :model-value="currentUser?.account?.email"
+        disabled
+        name="email"
+      />
+    </UiFormControl>
+
+    <UiFormControl
       id="update-account-firstname"
       v-slot="{ on, bind }"
       name="firstname"
@@ -90,7 +103,6 @@ const phoneCountryCode = useFieldModel('phoneCountryCode');
       {{ t('confirm') }}
     </UiButton>
 
-    <pre>{{ values }}</pre>
     <UiFormError v-if="error" :error="submitErrorMessage" text-lg m-y-3 />
   </form>
 </template>

@@ -8,7 +8,7 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <UiContainer sm="grid" gap-5 class="parameters">
+  <UiContainer sm="grid" gap-5 class="parameters" h-full>
     <UiSurface lt-sm="hidden" flex flex-col gap-5>
       <UiLink :to="{ name: routes.parameters.profile }">
         {{ t('profile') }}
