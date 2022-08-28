@@ -41,7 +41,7 @@ const genders = [
 </script>
 
 <template>
-  <form ref="formElement" space-y-5 @submit.prevent="onSubmit">
+  <form space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="signin-gender"
       v-slot="{ on, bind }"

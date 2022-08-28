@@ -41,12 +41,7 @@ const avatarVModel = computed<any>({
 </script>
 
 <template>
-  <form
-    v-if="currentUser"
-    ref="formElement"
-    space-y-5
-    @submit.prevent="onSubmit"
-  >
+  <form v-if="currentUser" space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="update-profile-avatar"
       v-slot="{ bind }"

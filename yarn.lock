@@ -321,6 +321,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@headlessui/vue@^1.6.7":
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.6.7.tgz#433b86e5f86203606e7ac4851777173a327dd8c4"
+  integrity sha512-5sTCBpkUoFE7zhANn/6Z+pf3PUA7MD6BBaTsJcQybq9E4fnNiMM9agOJI9meXbtcawE6Dm8EeB5A8HAJEnZCbQ==
+
 "@humanwhocodes/config-array@^0.10.4":
   version "0.10.4"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.10.4.tgz#01e7366e57d2ad104feea63e72248f22015c520c"
@@ -992,6 +997,11 @@
   version "2.8.12"
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
   integrity sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==
+
+"@types/country-telephone-data@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@types/country-telephone-data/-/country-telephone-data-0.6.1.tgz#5ee0cd98895a5cf0d9242cbdc8b9fd69da9b0d9a"
+  integrity sha512-GjrvfnS+mFyEj1wOr5L7KKWHAcFgNxilP/AnNdQj2EM0R7c9rlM8OC+Pf2H5KHiMDbH/XjApJgdnjN/WYbzWew==
 
 "@types/eslint@^8.4.5":
   version "8.4.5"
@@ -2457,6 +2467,11 @@ cors@^2.8.5, cors@~2.8.5:
   dependencies:
     object-assign "^4"
     vary "^1"
+
+country-flags-svg@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/country-flags-svg/-/country-flags-svg-1.1.6.tgz#150981ee1cc751374015820f5b65f366074780fb"
+  integrity sha512-psH37hXJvoL5q4NjpOS5K/XorDwHPlchBXCTkFv8e9Jh/VCcfKRmB5Gsdpq5ZrsrJvW2MrLdzamUecPosevsLw==
 
 country-telephone-data@^0.6.3:
   version "0.6.3"

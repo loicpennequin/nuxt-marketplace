@@ -20,7 +20,7 @@ const {
   }
 });
 
-const { handleSubmit, values } = useForm<UpdateAccountDto>({
+const { handleSubmit, values, useFieldModel } = useForm<UpdateAccountDto>({
   validationSchema: toFormValidator(updateAccountDto),
   initialValues: {
     userId: currentUser.value?.id as string,
@@ -38,15 +38,13 @@ const genders = [
   { label: t('genders.female'), value: Gender.FEMALE },
   { label: t('genders.other'), value: Gender.OTHER }
 ];
+
+const phoneNumber = useFieldModel('phoneNumber');
+const phoneCountryCode = useFieldModel('phoneCountryCode');
 </script>
 
 <template>
-  <form
-    v-if="currentUser"
-    ref="formElement"
-    space-y-5
-    @submit.prevent="onSubmit"
-  >
+  <form v-if="currentUser" space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="update-account-firstname"
       v-slot="{ on, bind }"
@@ -76,11 +74,16 @@ const genders = [
 
     <UiFormControl
       id="update-profile-phone-number"
-      v-slot="{ on, bind }"
+      v-slot="{ bind: { id, name } }"
       name="phoneNumber"
       :label="t('phoneNumber.label')"
     >
-      <UiPhoneInput v-bind="bind" v-on="on" />
+      <UiPhoneInput
+        v-model:number="phoneNumber"
+        v-model:code="phoneCountryCode"
+        :id="id"
+        :name="name"
+      />
     </UiFormControl>
 
     <UiButton mt-5 w-full :is-loading="isLoading" @click="reset">

@@ -32,7 +32,7 @@ const submitErrorMessage = useSubmitError(error);
 </script>
 
 <template>
-  <form ref="formElement" space-y-5 @submit.prevent="onSubmit">
+  <form space-y-5 @submit.prevent="onSubmit">
     <UiFormControl
       id="signup-mail"
       v-slot="{ on, bind }"
