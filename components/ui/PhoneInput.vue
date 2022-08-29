@@ -46,7 +46,7 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
     <UiListBox
       v-model="countryVModel"
       :options="phoneData.allCountries"
-      w="1/3"
+      w="max"
       h-full
     >
       <template #button>
@@ -57,7 +57,6 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
           aspect="4/3"
         />
         +({{ selectedCountry?.dialCode }})
-        <span m-l-auto i-ui-caret-down h-4 />
       </template>
 
       <template #option="{ value: country }">
@@ -74,9 +73,8 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
 
     <input
       v-model="numberVModel"
-      max-w="2/3"
-      flex-1
       bg="light-2 dark:dark-3"
+      flex-1
       border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
       pattern="[0-9]"
       p="x-3 y-2"
@@ -84,6 +82,7 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
       type="tel"
       :name="props.name"
       :disabled="props.disabled"
+      min-w="0"
       @keypress="onKeypress"
     />
   </div>

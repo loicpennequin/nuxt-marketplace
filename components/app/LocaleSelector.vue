@@ -13,21 +13,13 @@ const vModel = computed({
 </script>
 
 <template>
-  <select
-    v-model="vModel"
-    color-black
-    p-2
-    bg-light-3
-    dark:bg-dark-2
-    color-inherit
-  >
-    <option
-      v-for="lang in availableLocales"
-      :key="lang"
-      :value="lang"
-      bg="hover:brand-500"
-    >
+  <UiListBox v-model="vModel" :options="availableLocales" h="auto">
+    <template #button>
+      {{ t(`languages.${vModel}`) }}
+    </template>
+
+    <template #option="{ value: lang }">
       {{ t(`languages.${lang}`) }}
-    </option>
-  </select>
+    </template>
+  </UiListBox>
 </template>

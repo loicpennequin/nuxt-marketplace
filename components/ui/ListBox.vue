@@ -8,11 +8,15 @@ import {
 } from '@headlessui/vue';
 import { UseVirtualList } from '@vueuse/components';
 
-const props = defineProps<{
-  modelValue: Maybe<any>;
-  options: any[];
-  disabled?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    modelValue: Maybe<any>;
+    options: any[];
+    disabled?: boolean;
+    h?: string;
+  }>(),
+  { h: '15rem' }
+);
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: any): void;
@@ -26,43 +30,46 @@ const vModel = useVModel(props, 'modelValue', emit);
     <ListboxButton
       flex
       items-center
-      w-full
-      h-full
       p-2
       gap-2
+      whitespace-pre
       border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
     >
       <slot name="button" />
+      <span m-l-auto i-ui-caret-down h-4 aspect-square />
     </ListboxButton>
-    <ListboxOptions
-      divide-y
-      divide="black/30 dark:white/30"
-      bg="light-1 dark:dark-1 hover:light-3 dark:hover:dark-2"
-      border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
-      m-t-3
-      shadow-md
-      overflow-y-auto
-      absolute
-      w="18rem"
-    >
-      <UseVirtualList
-        v-slot="{ data }"
-        :list="props.options"
-        :options="{ itemHeight: 40 }"
-        height="15rem"
+    <ClientOnly>
+      <ListboxOptions
+        divide-y
+        divide="black/30 dark:white/30"
+        bg="light-1 dark:dark-1 hover:light-3 dark:hover:dark-2"
+        border="solid 1 light-9 dark:dark-9"
+        m-t-3
+        shadow-md
+        overflow-y-auto
+        absolute
+        min-w="full"
       >
-        <ListboxOption
-          flex
-          gap-2
-          p-2
-          :value="data"
-          cursor-pointer
-          h-40px
-          overflow-hidden
+        <UseVirtualList
+          v-slot="{ data }"
+          :list="props.options"
+          :options="{ itemHeight: 40 }"
+          :height="props.h"
         >
-          <slot name="option" :value="data" />
-        </ListboxOption>
-      </UseVirtualList>
-    </ListboxOptions>
+          <ListboxOption
+            flex
+            gap-2
+            p-2
+            :value="data"
+            cursor-pointer
+            h-40px
+            overflow-hidden
+            bg="hover:light-6 dark:hover:dark-3"
+          >
+            <slot name="option" :value="data" />
+          </ListboxOption>
+        </UseVirtualList>
+      </ListboxOptions>
+    </ClientOnly>
   </Listbox>
 </template>

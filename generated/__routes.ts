@@ -15,6 +15,8 @@ export const routerPagesNames = {
   'lost-Password': 'lost-password' as const,
   parameters: {
     account: 'parameters-account' as const,
+    notifications: 'parameters-notifications' as const,
+    payment: 'parameters-payment' as const,
     profile: 'parameters-profile' as const
   },
   'profile-Slug': 'profile-slug' as const,
@@ -33,6 +35,8 @@ export type TypedRouteList =
   | 'login'
   | 'lost-password'
   | 'parameters-account'
+  | 'parameters-notifications'
+  | 'parameters-payment'
   | 'parameters-profile'
   | 'profile-slug'
   | 'register'

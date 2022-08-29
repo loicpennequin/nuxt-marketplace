@@ -77,6 +77,15 @@ const phoneCountryCode = useFieldModel('phoneCountryCode');
     </UiFormControl>
 
     <UiFormControl
+      id="signin-password"
+      v-slot="{ bind, on }"
+      name="password"
+      :label="t('password.label')"
+    >
+      <UiPasswordInput v-bind="bind" v-on="on" />
+    </UiFormControl>
+
+    <UiFormControl
       id="signin-gender"
       v-slot="{ on, bind }"
       name="gender"
@@ -122,6 +131,9 @@ const phoneCountryCode = useFieldModel('phoneCountryCode');
     "phoneNumber": {
       "label": "Phone  number"
     },
+    "password": {
+      "label": "Change password"
+    },
     "errors": {
       "500": "Sorry, we are not able to update your profile at this time. Please try again later."
     }
@@ -138,6 +150,9 @@ const phoneCountryCode = useFieldModel('phoneCountryCode');
     },
     "phoneNumber": {
       "label": "N° de téléphone"
+    },
+    "password": {
+      "label": "Changer de mot de passe"
     },
     "errors": {
       "500": "Désolé, une erreur est survenue lors de la mise à jour de votre profil. Veuillez réessayer plus tard."

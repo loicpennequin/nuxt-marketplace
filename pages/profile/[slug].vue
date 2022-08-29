@@ -26,39 +26,12 @@ const { t } = useI18n();
     <UiSurface v-else-if="isError">Failed to load profile</UiSurface>
     <UiSurface v-else-if="!user">This user doesn't exist</UiSurface>
     <template v-else-if="user">
-      <UiSurface flex gap-6>
-        <UserAvatar :user="user" h="22" text-2xl />
-        <div space-y-2>
-          <h2 text-xl font-bold>{{ user.username }}</h2>
-          <p flex items="start sm:center" gap-2>
-            <span i-ui-arrow-right-to-bracket h-5 />
-            {{ t('joinedAt', { timeago: createdTimeAgo }) }}
-          </p>
-          <p flex items="start sm:center" gap-2>
-            <span i-ui-clock h-5 />
-            {{ t('lastOnline', { timeago: lastOnlineTimeAgo }) }}
-          </p>
-
-          <div
-            m-t="5!"
-            p-3
-            italic
-            border="solid 1 light-7 dark:dark-4"
-            whitespace-pre-wrap
-          >
-            <div
-              w-8
-              h-8
-              i-ui-quote-left
-              float-left
-              bg="currentColor"
-              m-r-2
-              m-l="-5"
-              m-t="-3"
-            />
-            <p>{{ user.bio }}</p>
-          </div>
+      <UiSurface flex gap-6 lt-sm="flex-col">
+        <div self="lt-sm:center">
+          <UserAvatar :user="user" h="30 sm:22" text-2xl />
         </div>
+        <UserProfileInfos :user="user" flex-1 />
+        <UserProfileActions :user="user" m-r="sm:8" />
       </UiSurface>
     </template>
   </UiContainer>

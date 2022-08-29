@@ -22,7 +22,12 @@ export type RouteListDecl = {
   index: 'index';
   login: 'login';
   'lost-Password': 'lost-password';
-  parameters: { account: 'parameters-account'; profile: 'parameters-profile' };
+  parameters: {
+    account: 'parameters-account';
+    notifications: 'parameters-notifications';
+    payment: 'parameters-payment';
+    profile: 'parameters-profile';
+  };
   'profile-Slug': 'profile-slug';
   register: 'register';
   'reset-Password': 'reset-password';
@@ -43,6 +48,8 @@ export type TypedRouteParams = {
   login: never;
   'lost-password': never;
   'parameters-account': never;
+  'parameters-notifications': never;
+  'parameters-payment': never;
   'parameters-profile': never;
   'profile-slug': {
     slug: string | number;

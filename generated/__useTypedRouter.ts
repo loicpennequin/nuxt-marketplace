@@ -34,6 +34,8 @@ export const useTypedRouter = (): {
     'lost-Password': 'lost-password',
     parameters: {
       account: 'parameters-account',
+      notifications: 'parameters-notifications',
+      payment: 'parameters-payment',
       profile: 'parameters-profile'
     },
     'profile-Slug': 'profile-slug',

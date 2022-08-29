@@ -6,7 +6,7 @@ const { routes } = useTypedRouter();
   <div min-h="screen" grid class="layout">
     <AppHeader />
 
-    <main bg-light-6 dark:bg-dark-3 max-w-screen p-y-3>
+    <main bg-light-4 dark:bg-dark-3 max-w-screen p-y-3>
       <slot />
     </main>
 

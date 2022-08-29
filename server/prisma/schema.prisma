@@ -32,7 +32,9 @@ model User {
   cartsAsSeller Cart[]    @relation(name: "seller")
   cartsAsBuyer  Cart[]    @relation(name: "buyer")
   avatarId      String?   @unique
-  avatar        Media?    @relation(fields: [avatarId], references: [id])
+  avatar        Media?    @relation(fields: [avatarId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index(fields: [slug])
 }
 
 model Account {
@@ -51,16 +53,18 @@ model Account {
   userId                String    @unique
   user                  User      @relation(fields: [userId], references: [id])
 
-  @@index(fields: [refreshToken])
+  @@index(fields: [refreshToken, email])
 }
 
 model Product {
-  id          String @id @default(cuid())
-  name        String @db.VarChar(255)
+  id          String  @id @default(cuid())
+  name        String  @db.VarChar(255)
   description String
   price       Int
+  images      Media[] @relation()
   sellerId    String
-  seller      User   @relation(fields: [sellerId], references: [id])
+  seller      User    @relation(fields: [sellerId], references: [id])
+  mediaId     String
 }
 
 model Cart {
@@ -72,8 +76,10 @@ model Cart {
 }
 
 model Media {
-  id     String @id @default(cuid())
-  url    String
-  User   User?
-  userId String
+  id        String   @id @default(cuid())
+  url       String
+  User      User?
+  userId    String?
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?
 }
