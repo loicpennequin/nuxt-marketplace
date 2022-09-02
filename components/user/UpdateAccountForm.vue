@@ -6,7 +6,7 @@ import { UpdateAccountDto, updateAccountDto } from '~~/dtos/account.dto';
 import { Gender } from '~~/utils/constants/enums';
 
 const { t } = useI18n();
-const { data: currentUser, refetch } = useCurrentUser();
+const { data: currentUser, refetch: refetchCurrentUser } = useCurrentUser();
 
 const {
   isLoading,
@@ -15,12 +15,11 @@ const {
   error
 } = useTrpcMutation('account.updateAccount', {
   onSuccess() {
-    console.log('ok');
-    refetch();
+    refetchCurrentUser();
   }
 });
 
-const { handleSubmit, values, useFieldModel } = useForm<UpdateAccountDto>({
+const { handleSubmit, useFieldModel } = useForm<UpdateAccountDto>({
   validationSchema: toFormValidator(updateAccountDto),
   initialValues: {
     userId: currentUser.value?.id as string,

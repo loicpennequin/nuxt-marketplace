@@ -5,6 +5,7 @@ import { authRouter } from './routers/auth';
 import { userRouter } from './routers/user';
 import { accountRouter } from './routers/account';
 import { trpcLog } from './utils/trpc-logger';
+import { productRouter } from './routers/product';
 
 export const router = createRouter()
   .middleware(async ({ path, next }) => {
@@ -19,4 +20,5 @@ export const router = createRouter()
   })
   .merge('user.', userRouter)
   .merge('auth.', authRouter)
-  .merge('account.', accountRouter);
+  .merge('account.', accountRouter)
+  .merge('product.', productRouter);

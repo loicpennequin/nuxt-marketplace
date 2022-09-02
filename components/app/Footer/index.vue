@@ -5,7 +5,7 @@ const { routes } = useTypedRouter();
 <template>
   <UiSurface is="footer" p="8">
     <UiContainer flex justify-between flex-wrap>
-      <div grow="1 sm:0" text-center m-b="8 sm:0">
+      <div grow="1 md:0" text-center m-b="8 md:0">
         Created by
         <a underline href="https://github.com/loicpennequin" target="_blank">
           Daria
@@ -38,7 +38,7 @@ const { routes } = useTypedRouter();
           cookies
         </NuxtLink>
 
-        <div grow="1 sm:0">© 2022 Daria, All rights reserved.</div>
+        <div grow="1 md:0">© 2022 Daria, All rights reserved.</div>
       </div>
     </UiContainer>
   </UiSurface>

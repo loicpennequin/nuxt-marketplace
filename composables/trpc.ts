@@ -21,8 +21,7 @@ import type { Ref } from 'vue';
 import { useNuxtApp } from '#app';
 
 export function useClient(): TRPCClient<AppRouter> {
-  const { $client } = useNuxtApp();
-  return $client;
+  return useNuxtApp().$client;
 }
 
 const clientHeaders = ref({});
@@ -54,6 +53,7 @@ export const useTrpcQuery = <
   options?: MaybeRef<TOptions>
 ) => {
   const client = useClient();
+  console.log(client);
   const resolvedOptions = computed(() => {
     return {
       queryKey: unref(pathAndInput) || [],

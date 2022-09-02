@@ -4,6 +4,9 @@ import ConnectedMenu from './ConnectedMenu.vue';
 import DisconnectedMenu from './DisconnectedMenu.vue';
 
 const { isLoggedIn } = useAuth();
+const { t } = useI18n();
+const { routes } = useTypedRouter();
+
 const menuComponent = computed(() =>
   isLoggedIn.value ? ConnectedMenu : DisconnectedMenu
 );
@@ -26,8 +29,6 @@ if (!import.meta.env.SSR) {
     )
   );
 }
-const { t } = useI18n();
-const { routes } = useTypedRouter();
 </script>
 
 <template>

@@ -8,15 +8,6 @@ definePageMeta({
 const {
   user: { isLoading, data: user, isError }
 } = profileLoader.load();
-
-const createdTimeAgo = useTimeAgo(
-  computed(() => new Date(user.value?.createdAt || Date.now()))
-);
-const lastOnlineTimeAgo = useTimeAgo(
-  computed(() => new Date(user.value?.lastOnlineAt || Date.now()))
-);
-
-const { t } = useI18n();
 </script>
 
 <template>
@@ -26,13 +17,15 @@ const { t } = useI18n();
     <UiSurface v-else-if="isError">Failed to load profile</UiSurface>
     <UiSurface v-else-if="!user">This user doesn't exist</UiSurface>
     <template v-else-if="user">
-      <UiSurface flex gap-6 lt-sm="flex-col">
+      <UiSurface flex gap-6 lt-sm="flex-col" m-b-5>
         <div self="lt-sm:center">
           <UserAvatar :user="user" h="30 sm:22" text-2xl />
         </div>
         <UserProfileInfos :user="user" flex-1 />
         <UserProfileActions :user="user" m-r="sm:8" />
       </UiSurface>
+
+      <UserProducts :user="user" />
     </template>
   </UiContainer>
 </template>

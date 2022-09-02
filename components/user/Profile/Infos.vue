@@ -45,7 +45,7 @@ const lastOnlineTimeAgo = useTimeAgo(
         m-l="-5"
         m-t="-3"
       />
-      <p>{{ user.bio }}</p>
+      <p>{{ user.bio ?? t('noBio') }}</p>
     </div>
   </div>
 </template>
@@ -54,11 +54,13 @@ const lastOnlineTimeAgo = useTimeAgo(
 {
   "en": {
     "joinedAt": "Joined {timeago}",
-    "lastOnline": "Last online {timeago}"
+    "lastOnline": "Last online {timeago}",
+    "noBio": "This user has no bio."
   },
   "fr": {
     "joinedAt": "Incrit {timeago}",
-    "lastOnline": "Dernière connexion {timeago}"
+    "lastOnline": "Dernière connexion {timeago}",
+    "noBio": "Cet utilisateur n'a pas de description."
   }
 }
 </i18n>

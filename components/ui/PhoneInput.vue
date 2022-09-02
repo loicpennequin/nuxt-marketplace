@@ -47,6 +47,7 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
       v-model="countryVModel"
       :options="phoneData.allCountries"
       w="max"
+      options-width="25rem"
       h-full
     >
       <template #button>
@@ -71,17 +72,15 @@ const getFlag = (iso2: string): string => findFlagUrlByIso2Code(iso2);
       </template>
     </UiListBox>
 
-    <input
+    <UiTextInput
       v-model="numberVModel"
-      bg="light-2 dark:dark-3"
+      :id="props.id"
       flex-1
-      border="solid 1 light-9 dark:dark-9 focus-within:brand-4"
-      pattern="[0-9]"
-      p="x-3 y-2"
       outline="focus:none"
       type="tel"
       :name="props.name"
       :disabled="props.disabled"
+      p="0"
       min-w="0"
       @keypress="onKeypress"
     />

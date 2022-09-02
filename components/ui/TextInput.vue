@@ -47,6 +47,7 @@ const slots = useSlots();
       p="x-3 y-2"
       :disabled="props.disabled"
       outline="focus:none"
+      min-w="0"
     />
 
     <div v-if="slots.right || props.rightIcon" m-r-2 self-stretch>

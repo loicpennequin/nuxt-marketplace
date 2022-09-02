@@ -58,13 +58,12 @@ model Account {
 
 model Product {
   id          String  @id @default(cuid())
-  name        String  @db.VarChar(255)
+  title       String  @db.VarChar(255)
   description String
   price       Int
-  images      Media[] @relation()
   sellerId    String
   seller      User    @relation(fields: [sellerId], references: [id])
-  mediaId     String
+  images      Media[] @relation()
 }
 
 model Cart {

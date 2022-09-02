@@ -14,7 +14,6 @@ const {
   error
 } = useTrpcMutation('user.updateProfile', {
   onSuccess() {
-    console.log('ok');
     refetch();
   }
 });

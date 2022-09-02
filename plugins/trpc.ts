@@ -33,7 +33,6 @@ export default defineNuxtPlugin(nuxtApp => {
       }
     }
   });
-
   nuxtApp.provide('client', client);
 });
 

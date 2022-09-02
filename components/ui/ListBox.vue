@@ -13,6 +13,7 @@ const props = withDefaults(
     modelValue: Maybe<any>;
     options: any[];
     disabled?: boolean;
+    optionsWidth?: string;
     h?: string;
   }>(),
   { h: '15rem' }
@@ -49,6 +50,7 @@ const vModel = useVModel(props, 'modelValue', emit);
         overflow-y-auto
         absolute
         min-w="full"
+        :w="props.optionsWidth"
       >
         <UseVirtualList
           v-slot="{ data }"
