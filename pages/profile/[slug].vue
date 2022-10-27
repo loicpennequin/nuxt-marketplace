@@ -8,14 +8,17 @@ definePageMeta({
 const {
   user: { isLoading, data: user, isError }
 } = profileLoader.load();
+
+const { t } = useI18n();
 </script>
 
 <template>
   <UiContainer max-w="screen-xl" m-y-6>
     <UiSurface v-if="isLoading" flex justify-center><UiSpinner /></UiSurface>
 
-    <UiSurface v-else-if="isError">Failed to load profile</UiSurface>
-    <UiSurface v-else-if="!user">This user doesn't exist</UiSurface>
+    <UiSurface v-else-if="isError">{{ t('loadingError') }}</UiSurface>
+    <UiSurface v-else-if="!user">{{ t('empty') }}</UiSurface>
+
     <template v-else-if="user">
       <UiSurface flex gap-6 lt-sm="flex-col" m-b-5>
         <div self="lt-sm:center">
@@ -33,12 +36,12 @@ const {
 <i18n lang="json">
 {
   "en": {
-    "joinedAt": "Joined {timeago}",
-    "lastOnline": "Last online {timeago}"
+    "loadingError": "Failed to load profile",
+    "empty": "This user doesn't exist"
   },
   "fr": {
-    "joinedAt": "Incrit {timeago}",
-    "lastOnline": "Dernière connexion {timeago}"
+    "loadingError": "Erreur lors du chargement du profile",
+    "empty": "Cet utilisateur n'existe pas"
   }
 }
 </i18n>

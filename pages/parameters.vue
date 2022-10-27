@@ -40,7 +40,7 @@ const menuItems: MenuItem[] = [
   <UiContainer sm="grid" gap-5 class="parameters" h-full>
     <UiSurface lt-sm="hidden" p="x-5 y-6" as="nav">
       <ul divide-y divide="black/30 dark:white/30">
-        <li v-for="item in menuItems" :key="item.target" p="y-6">
+        <li v-for="item in menuItems" :key="item.target" p="y-4">
           <UiLink
             :to="{ name: item.target }"
             color="inherit hover:brand-4 dark:hover:brand-2"

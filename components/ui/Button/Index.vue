@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Component } from 'vue';
 import UiButtonFull from './Full.vue';
 import UiButtonOutlined from './Outlined.vue';
 
@@ -12,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'full'
 });
 
-const variantMap = new Map<ButtonVariant, any>([
+const variantMap = new Map<ButtonVariant, Component>([
   ['full', UiButtonFull],
   ['outlined', UiButtonOutlined]
 ]);
